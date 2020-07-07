@@ -129,7 +129,7 @@ combinations_results %>%
 
 ### You can also do all of these analyses in our shiny app:
 
-[Critical Power Dashboard](https:shiny.fmattioni.me/CPapp/)
+[Critical Power Dashboard](https://www.shiny.fmattioni.me/CPapp/)
 
 ## Coming soon
 

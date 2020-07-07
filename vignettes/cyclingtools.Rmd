@@ -136,4 +136,4 @@ method_3_hyp(
 
 ## Shiny app
 
-All of these functions can be performed in [Critical Power Dashboard](https:shiny.fmattioni.me/CPapp/)
+All of these functions can be performed in [Critical Power Dashboard](https://www.shiny.fmattioni.me/CPapp/)
