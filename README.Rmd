@@ -1,0 +1,118 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# cyclingtools <img src='man/figures/logo.png' align="right" height="240" />
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/cyclingtools)](https://CRAN.R-project.org/package=cyclingtools)
+<br>
+<a href="https://www.buymeacoffee.com/XQauwUWGm" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+<!-- badges: end -->
+
+The goal of `cyclingtools` is to provide tools for making easier to analyze data in cycling.
+
+## Installation
+
+You can install the development version of `cyclingtools` from [GitHub](https://github.com/fmmattioni/cyclingtools) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("fmmattioni/cyclingtools")
+```
+## Usage
+
+### Critical Power
+
+#### Demo data
+
+The package comes with a demonstration data frame to show how the functions work and also to show you how you can setup your data:
+
+```{r}
+library(cyclingtools)
+
+demo_data
+```
+
+#### Simple analysis
+
+Perform a simple analysis from the chosen critical power models:
+
+```{r}
+simple_results <- critical_power(
+  .data = demo_data, 
+  power_output_column = "PO", 
+  time_to_exhaustion_column = "TTE", 
+  method = c("3-hyp", "2-hyp", "linear", "1/time"), 
+  plot = TRUE, 
+  all_combinations = FALSE
+)
+
+simple_results
+```
+
+You can also plot the results:
+
+```{r dpi=300}
+simple_results %>% 
+  dplyr::filter(method == "3-hyp") %>% 
+  dplyr::pull(plot)
+```
+
+#### All possible combinations analysis
+
+You can also perform an analysis with all the possible combinations of time-to-exhaustion trials provided. All you need to do is to set `all_combinations = TRUE`:
+
+```{r}
+combinations_results <- critical_power(
+  .data = demo_data, 
+  power_output_column = "PO", 
+  time_to_exhaustion_column = "TTE", 
+  method = c("3-hyp", "2-hyp", "linear", "1/time"), 
+  plot = TRUE, 
+  all_combinations = TRUE
+)
+
+combinations_results
+```
+
+You can also plot the results:
+
+```{r dpi=300}
+combinations_results %>% 
+  dplyr::slice(1) %>% 
+  dplyr::pull(plot)
+```
+
+### You can also do all of these analyses in our shiny app:
+
+[Critical Power Dashboard](https:shiny.fmattioni.me/CPapp/)
+
+## Coming soon
+
+* Training impulse analyses (iTRIMP, bTRIMP, eTRIMP, luTRIMP)
+
+* Suggestions? Feel free to open an issue!
+
+## Related work
+
+[cycleRtools](https://cran.r-project.org/web/packages/cycleRtools/index.html): A suite of functions for analysing cycling data.
+
+## Citation
+
+```{r}
+citation("cyclingtools")
+```
+

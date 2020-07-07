@@ -1,0 +1,48 @@
+destination: docs
+
+template:
+  params:
+    bootswatch: sandstone
+    ganalytics: UA-126092763-1
+  opengraph:
+    image:
+      src: man/figures/logo.png
+      alt: "Tools for Manipulating Cycling Data"
+    twitter:
+      creator: "@felipe_mattioni"
+      card: summary_large_image
+
+authors:
+  Felipe Mattioni Maturana:
+    href: https://fmattioni.me
+
+toc:
+  depth: 3
+
+development:
+  mode: unreleased
+
+navbar:
+  title: ~
+  type: default
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/fmmattioni/cyclingtools
+  - icon: fa-twitter fa-lg
+    href: https://twitter.com/felipe_mattioni
+
+reference:
+- title: Critical power analysis
+  desc: >
+    Perform critical power estimations from a series of time-to-exhaustion trials.
+  contents:
+  - critical_power
+  - starts_with("method")
+  - plot_cp
+  - summary_cp
+  - starts_with("get")
+- title: Data
+  desc: >
+    Demomstration data for critical power analysis
+  contents:
+  - demo_data
