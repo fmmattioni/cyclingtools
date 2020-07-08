@@ -64,13 +64,13 @@ simple_results <- critical_power(
 
 simple_results
 #> # A tibble: 4 x 12
-#>   method data  model CP    `CP SEE` `W'`  `W' SEE` Pmax  `Pmax SEE` R2    RMSE 
-#>   <chr>  <lis> <lis> <chr> <chr>    <chr> <chr>    <chr> <chr>      <chr> <chr>
-#> 1 3-hyp  <tib… <nls> 260.3 3.1      2740… 4794     1003… 834.7      0.99… 37.14
-#> 2 2-hyp  <tib… <nls> 262.2 1.6      2417… 1888.9   <NA>  <NA>       0.997 34.7 
-#> 3 linear <tib… <lm>  265.5 3        2096… 2247.9   <NA>  <NA>       0.99… 3149…
-#> 4 1/time <tib… <lm>  273.8 6.2      1778… 1160     <NA>  <NA>       0.98… 9.05 
-#> # … with 1 more variable: plot <list>
+#>   method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2
+#>   <chr>  <lis> <lis> <dbl>    <dbl>  <dbl>    <dbl> <dbl>      <dbl> <dbl>
+#> 1 3-hyp  <tib… <nls>  260.      3.1 27410.    4794  1004.       835. 0.998
+#> 2 2-hyp  <tib… <nls>  262.      1.6 24174.    1889.   NA         NA  0.997
+#> 3 linear <tib… <lm>   266.      3   20961.    2248.   NA         NA  1.00 
+#> 4 1/time <tib… <lm>   274.      6.2 17784.    1160    NA         NA  0.987
+#> # … with 2 more variables: RMSE <dbl>, plot <list>
 ```
 
 You can also plot the results:
@@ -103,19 +103,19 @@ combinations_results <- critical_power(
 
 combinations_results
 #> # A tibble: 74 x 13
-#>    index method data  model CP    `CP SEE` `W'`  `W' SEE` Pmax  `Pmax SEE` R2   
-#>    <chr> <chr>  <lis> <lis> <chr> <chr>    <chr> <chr>    <chr> <chr>      <chr>
-#>  1 [1,2… 3-hyp  <tib… <nls> 260.3 3.1      2740… 4794     1003… 834.7      0.99…
-#>  2 [1,2… 2-hyp  <tib… <nls> 262.2 1.6      2417… 1888.9   <NA>  <NA>       0.997
-#>  3 [1,2… linear <tib… <lm>  265.5 3        2096… 2247.9   <NA>  <NA>       0.99…
-#>  4 [1,2… 1/time <tib… <lm>  273.8 6.2      1778… 1160     <NA>  <NA>       0.98…
-#>  5 [1,2… 3-hyp  <tib… <nls> 246.5 6.2      4269… 7655     594.8 70.2       0.99…
-#>  6 [1,2… 2-hyp  <tib… <nls> 261.2 4.7      2481… 3690.8   <NA>  <NA>       0.99…
-#>  7 [1,2… linear <tib… <lm>  268.8 5.9      1997… 2877.4   <NA>  <NA>       0.99…
-#>  8 [1,2… 1/time <tib… <lm>  278.4 7.9      1719… 1338.8   <NA>  <NA>       0.98…
-#>  9 [1,2… 3-hyp  <tib… <nls> 255   1.9      3646… 3328.4   626.9 63.7       0.99…
-#> 10 [1,2… 2-hyp  <tib… <nls> 261.7 2.2      2494… 2882.2   <NA>  <NA>       0.99…
-#> # … with 64 more rows, and 2 more variables: RMSE <chr>, plot <list>
+#>    index method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`
+#>    <chr> <chr>  <lis> <lis> <dbl>    <dbl>  <dbl>    <dbl> <dbl>      <dbl>
+#>  1 [1,2… 3-hyp  <tib… <nls>  260.      3.1 27410.    4794  1004.      835. 
+#>  2 [1,2… 2-hyp  <tib… <nls>  262.      1.6 24174.    1889.   NA        NA  
+#>  3 [1,2… linear <tib… <lm>   266.      3   20961.    2248.   NA        NA  
+#>  4 [1,2… 1/time <tib… <lm>   274.      6.2 17784.    1160    NA        NA  
+#>  5 [1,2… 3-hyp  <tib… <nls>  246.      6.2 42699.    7655   595.       70.2
+#>  6 [1,2… 2-hyp  <tib… <nls>  261.      4.7 24814.    3691.   NA        NA  
+#>  7 [1,2… linear <tib… <lm>   269.      5.9 19977.    2877.   NA        NA  
+#>  8 [1,2… 1/time <tib… <lm>   278.      7.9 17194.    1339.   NA        NA  
+#>  9 [1,2… 3-hyp  <tib… <nls>  255       1.9 36462.    3328.  627.       63.7
+#> 10 [1,2… 2-hyp  <tib… <nls>  262.      2.2 24940.    2882.   NA        NA  
+#> # … with 64 more rows, and 3 more variables: R2 <dbl>, RMSE <dbl>, plot <list>
 ```
 
 You can also plot the results:
