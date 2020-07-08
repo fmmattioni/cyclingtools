@@ -40,7 +40,8 @@ simple_results <- critical_power(
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
-  all_combinations = FALSE
+  all_combinations = FALSE,
+  power_in_y_axis = FALSE
 )
 
 simple_results
@@ -55,7 +56,8 @@ critical_power(
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp"), 
   plot = TRUE, 
-  all_combinations = FALSE
+  all_combinations = FALSE,
+  power_in_y_axis = FALSE
 )
 ```
 
@@ -100,7 +102,8 @@ combinations_results <- critical_power(
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
-  all_combinations = TRUE
+  all_combinations = TRUE,
+  power_in_y_axis = FALSE
 )
 
 combinations_results
@@ -130,7 +133,8 @@ method_3_hyp(
   .data = demo_data, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
-  plot = TRUE
+  plot = TRUE,
+  power_in_y_axis = FALSE
 )
 ```
 
