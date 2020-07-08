@@ -40,6 +40,9 @@ method_3_hyp <- function(
   if(nrow(.data) < 4)
     return(NA)
 
+  if(missing(.data))
+    stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
+
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
@@ -131,6 +134,9 @@ method_2_hyp <- function(
   if(nrow(.data) < 3)
     return(NA)
 
+  if(missing(.data))
+    stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
+
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
@@ -215,6 +221,9 @@ method_linear <- function(
   plot = TRUE
 ) {
 
+  if(missing(.data))
+    stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
+
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
@@ -287,6 +296,9 @@ method_1_time <- function(
   time_to_exhaustion_column,
   plot = TRUE
 ) {
+
+  if(missing(.data))
+    stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
 
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)

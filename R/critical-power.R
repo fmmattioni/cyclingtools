@@ -106,19 +106,12 @@ critical_power <- function(
   if(missing(.data))
     stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
 
-  ## make sure that column exists
-  if(!power_output_column %in% colnames(.data))
-    stop("It looks like the name of the power output column you chose does not exist.", call. = FALSE)
-
-  if(!time_to_exhaustion_column %in% colnames(.data))
-    stop("It looks like the name of the time-to-exhaustion column you chose does not exist.", call. = FALSE)
-
-  ## check method argument
-  method <- match.arg(arg = method, several.ok = TRUE)
-
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
+  ## check method argument
+  method <- match.arg(arg = method, several.ok = TRUE)
 
   if(all_combinations) {
     combinations <- get_combinations(
