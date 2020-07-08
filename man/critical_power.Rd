@@ -10,7 +10,8 @@ critical_power(
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
   plot = TRUE,
-  all_combinations = FALSE
+  all_combinations = FALSE,
+  power_in_y_axis = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ critical_power(
 \item{plot}{A boolean indicating whether to produce a plot from the critical power estimation. Default to \code{TRUE}.}
 
 \item{all_combinations}{A boolean indicating whether to perform the critical power estimation from all the possible combinations of time-to-exhaustion trials provided. Please, see 'Details' for more information. Default to \code{FALSE}.}
+
+\item{power_in_y_axis}{A boolean to indicate whether to plot the Power Output in the y-axis in the hyperbolic methods. Default to \code{FALSE}.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} containing the following columns:

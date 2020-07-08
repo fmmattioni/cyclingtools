@@ -7,6 +7,7 @@
 #' @param power_output_column The name of the power output column. This value has to be in watts. Default to `"PO"`.
 #' @param time_to_exhaustion_column The name of the time-to-exhaustion column. This value has to be in seconds. Default to `"TTE"`.
 #' @param plot A boolean indicating whether to produce a plot from the critical power estimation. Default to `TRUE`.
+#' @param power_in_y_axis A boolean to indicate whether to plot the Power Output in the y-axis. Default to `FALSE`.
 #'
 #' @return a [tibble][tibble::tibble-package] containing the following columns:
 #' \item{method}{The critical power method for that estimation.}
@@ -32,7 +33,8 @@ method_3_hyp <- function(
   .data,
   power_output_column,
   time_to_exhaustion_column,
-  plot = TRUE
+  plot = TRUE,
+  power_in_y_axis = FALSE
 ) {
 
   if(nrow(.data) < 4)
@@ -67,6 +69,10 @@ method_3_hyp <- function(
       model = model
     )
 
+    if(power_in_y_axis)
+      cp_plot <- cp_plot +
+        ggplot2::coord_flip()
+
     results_summary <- results_summary %>%
       dplyr::mutate(plot = list(cp_plot))
   }
@@ -88,6 +94,7 @@ method_3_hyp <- function(
 #' @param power_output_column The name of the power output column. This value has to be in watts. Default to `"PO"`.
 #' @param time_to_exhaustion_column The name of the time-to-exhaustion column. This value has to be in seconds. Default to `"TTE"`.
 #' @param plot A boolean indicating whether to produce a plot from the critical power estimation. Default to `TRUE`.
+#' @param power_in_y_axis A boolean to indicate whether to plot the Power Output in the y-axis. Default to `FALSE`.
 #'
 #' @return a [tibble][tibble::tibble-package] containing the following columns:
 #' \item{method}{The critical power method for that estimation.}
@@ -113,7 +120,8 @@ method_2_hyp <- function(
   .data,
   power_output_column,
   time_to_exhaustion_column,
-  plot = TRUE
+  plot = TRUE,
+  power_in_y_axis = FALSE
 ) {
 
   if(nrow(.data) < 3)
@@ -146,6 +154,10 @@ method_2_hyp <- function(
       method = "2-hyp",
       model = model
     )
+
+    if(power_in_y_axis)
+      cp_plot <- cp_plot +
+        ggplot2::coord_flip()
 
     results_summary <- results_summary %>%
       dplyr::mutate(plot = list(cp_plot))

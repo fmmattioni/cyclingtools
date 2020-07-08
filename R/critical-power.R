@@ -9,6 +9,7 @@
 #' @param method The method for estimating critical power. It can be one or multiple methods. Default to `c("3-hyp", "2-hyp", "linear", "1/time")`.
 #' @param plot A boolean indicating whether to produce a plot from the critical power estimation. Default to `TRUE`.
 #' @param all_combinations A boolean indicating whether to perform the critical power estimation from all the possible combinations of time-to-exhaustion trials provided. Please, see 'Details' for more information. Default to `FALSE`.
+#' @param power_in_y_axis A boolean to indicate whether to plot the Power Output in the y-axis in the hyperbolic methods. Default to `FALSE`.
 #'
 #' @details
 #' Please, note that estimations of critical power are highly influenced by the range
@@ -98,7 +99,8 @@ critical_power <- function(
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
   plot = TRUE,
-  all_combinations = FALSE
+  all_combinations = FALSE,
+  power_in_y_axis = FALSE
 ) {
 
   ## check method argument
@@ -131,13 +133,15 @@ critical_power <- function(
         .data = data,
         power_output_column = {{ power_output_column }},
         time_to_exhaustion_column = {{ time_to_exhaustion_column }},
-        plot = {{ plot }}
+        plot = {{ plot }},
+        power_in_y_axis = {{ power_in_y_axis }}
       ) %>% list(),
       method == "2-hyp" ~ method_2_hyp(
         .data = data,
         power_output_column = {{ power_output_column }},
         time_to_exhaustion_column = {{ time_to_exhaustion_column }},
-        plot = {{ plot }}
+        plot = {{ plot }},
+        power_in_y_axis = {{ power_in_y_axis }}
       ) %>% list(),
       method == "linear" ~ method_linear(
         .data = data,

@@ -8,7 +8,8 @@ method_2_hyp(
   .data,
   power_output_column,
   time_to_exhaustion_column,
-  plot = TRUE
+  plot = TRUE,
+  power_in_y_axis = FALSE
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ method_2_hyp(
 \item{time_to_exhaustion_column}{The name of the time-to-exhaustion column. This value has to be in seconds. Default to \code{"TTE"}.}
 
 \item{plot}{A boolean indicating whether to produce a plot from the critical power estimation. Default to \code{TRUE}.}
+
+\item{power_in_y_axis}{A boolean to indicate whether to plot the Power Output in the y-axis. Default to \code{FALSE}.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} containing the following columns:
