@@ -19,15 +19,15 @@ plot_cp <- function(
   method <- match.arg(method)
 
   if(method == "3-hyp") {
-    min_power_output <- min(.data[[power_output_column]])
-    max_power_output <- max(.data[[power_output_column]])
+    min_power_output <- min(.data[[{{ power_output_column }}]])
+    max_power_output <- max(.data[[{{ power_output_column }}]])
 
     new_data <- dplyr::tibble(
-      !!power_output_column := seq(min_power_output, max_power_output, 1)
+      !!{{ power_output_column }} := seq(min_power_output, max_power_output, 1)
     )
 
-    data_plot <- broom::augment(model, newdata = new_data) %>%
-      dplyr::rename_all(~ c(power_output_column, time_to_exhaustion_column))
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c({{ power_output_column }}, {{ time_to_exhaustion_column }})
 
     cp_plot <- data_plot %>%
       ggplot2::ggplot(ggplot2::aes(!!rlang::sym(power_output_column), !!rlang::sym(time_to_exhaustion_column))) +
@@ -39,15 +39,16 @@ plot_cp <- function(
                     title = bquote(CP[3-hyp])) +
       ggplot2::theme_light()
   } else if(method == "2-hyp") {
-    min_power_output <- min(.data[[power_output_column]])
-    max_power_output <- max(.data[[power_output_column]])
+
+    min_power_output <- min(.data[[{{ power_output_column }}]])
+    max_power_output <- max(.data[[{{ power_output_column }}]])
 
     new_data <- dplyr::tibble(
-      !!power_output_column := seq(min_power_output, max_power_output, 1)
+      !!{{ power_output_column }} := seq(min_power_output, max_power_output, 1)
     )
 
-    data_plot <- broom::augment(model, newdata = new_data) %>%
-      dplyr::rename_all(~ c(power_output_column, time_to_exhaustion_column))
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c({{ power_output_column }}, {{ time_to_exhaustion_column }})
 
     cp_plot <- data_plot %>%
       ggplot2::ggplot(ggplot2::aes(!!rlang::sym(power_output_column), !!rlang::sym(time_to_exhaustion_column))) +
@@ -59,6 +60,7 @@ plot_cp <- function(
                     title = bquote(CP[2-hyp])) +
       ggplot2::theme_light()
   } else if(method == "linear") {
+
     cp_plot <- .data %>%
       ggplot2::ggplot(ggplot2::aes(!!rlang::sym(time_to_exhaustion_column), !!rlang::sym(power_output_column) * !!rlang::sym(time_to_exhaustion_column))) +
       ggplot2::geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, colour = "red", size = 1) +
@@ -69,7 +71,9 @@ plot_cp <- function(
                     y = "Work (J)",
                     title = bquote(CP[linear])) +
       ggplot2::theme_light()
+
   } else if(method == "1/time") {
+
     cp_plot <- .data %>%
       ggplot2::ggplot(ggplot2::aes(1 / !!rlang::sym(time_to_exhaustion_column), !!rlang::sym(power_output_column))) +
       ggplot2::geom_smooth(method = "lm", formula = "y ~ x", se = FALSE, colour = "red", size = 1) +

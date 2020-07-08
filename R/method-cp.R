@@ -40,10 +40,14 @@ method_3_hyp <- function(
   if(nrow(.data) < 4)
     return(NA)
 
+  ## make sure column names work unquoted too
+  power_output_column <- rlang::ensym(power_output_column)
+  time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
   # Setting starting values
-  a_start <- max(.data[[power_output_column]]) * min(.data[[time_to_exhaustion_column]])
-  b_start <- min(.data[[power_output_column]]) - 30
-  c_start <- max(.data[[power_output_column]]) * 1.5
+  a_start <- max(.data[[{{ power_output_column }}]]) * min(.data[[{{ time_to_exhaustion_column }}]])
+  b_start <- min(.data[[{{ power_output_column }}]]) - 30
+  c_start <- max(.data[[{{ power_output_column }}]]) * 1.5
 
   # Formula
   cp_formula <- glue::glue("{time_to_exhaustion_column} ~ (AWC / ({power_output_column} - CP)) + (AWC / (CP - Pmax))")
@@ -57,14 +61,14 @@ method_3_hyp <- function(
     lower = c(AWC = 0, CP = 0, Pmax = 0)
   )
 
-  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = time_to_exhaustion_column, model = model, method = "3-hyp")
+  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = {{ time_to_exhaustion_column }}, model = model, method = "3-hyp")
 
   if(plot) {
 
     cp_plot <- plot_cp(
       .data = .data,
-      power_output_column = power_output_column,
-      time_to_exhaustion_column = time_to_exhaustion_column,
+      power_output_column = {{ power_output_column }},
+      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
       method = "3-hyp",
       model = model
     )
@@ -127,9 +131,13 @@ method_2_hyp <- function(
   if(nrow(.data) < 3)
     return(NA)
 
+  ## make sure column names work unquoted too
+  power_output_column <- rlang::ensym(power_output_column)
+  time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
   # Setting starting values
-  a_start <- max(.data[[power_output_column]]) * min(.data[[time_to_exhaustion_column]])
-  b_start <- min(.data[[power_output_column]]) - 30
+  a_start <- max(.data[[{{ power_output_column }}]]) * min(.data[[{{ time_to_exhaustion_column }}]])
+  b_start <- min(.data[[{{ power_output_column }}]]) - 30
 
   # Formula
   cp_formula <- glue::glue("{time_to_exhaustion_column} ~ AWC / ({power_output_column} - CP)")
@@ -143,14 +151,14 @@ method_2_hyp <- function(
     lower = c(AWC = 0, CP = 0)
   )
 
-  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = time_to_exhaustion_column, model = model, method = "2-hyp")
+  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = {{ time_to_exhaustion_column }}, model = model, method = "2-hyp")
 
   if(plot) {
 
     cp_plot <- plot_cp(
       .data = .data,
-      power_output_column = power_output_column,
-      time_to_exhaustion_column = time_to_exhaustion_column,
+      power_output_column = {{ power_output_column }},
+      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
       method = "2-hyp",
       model = model
     )
@@ -207,6 +215,10 @@ method_linear <- function(
   plot = TRUE
 ) {
 
+  ## make sure column names work unquoted too
+  power_output_column <- rlang::ensym(power_output_column)
+  time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
   # Formula
   cp_formula <- glue::glue("{power_output_column} * {time_to_exhaustion_column} ~ {time_to_exhaustion_column}")
 
@@ -216,14 +228,14 @@ method_linear <- function(
     data = .data
   )
 
-  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = time_to_exhaustion_column, model = model, method = "linear")
+  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = {{ time_to_exhaustion_column }}, model = model, method = "linear")
 
   if(plot) {
 
     cp_plot <- plot_cp(
       .data = .data,
-      power_output_column = power_output_column,
-      time_to_exhaustion_column = time_to_exhaustion_column,
+      power_output_column = {{ power_output_column }},
+      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
       method = "linear",
       model = model
     )
@@ -276,6 +288,10 @@ method_1_time <- function(
   plot = TRUE
 ) {
 
+  ## make sure column names work unquoted too
+  power_output_column <- rlang::ensym(power_output_column)
+  time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
   # Formula
   cp_formula <- glue::glue("{power_output_column} ~ I(1 / {time_to_exhaustion_column})")
 
@@ -285,14 +301,14 @@ method_1_time <- function(
     data = .data
   )
 
-  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = time_to_exhaustion_column, model = model, method = "1/time")
+  results_summary <- summary_cp(.data = .data, time_to_exhaustion_column = {{ time_to_exhaustion_column }}, model = model, method = "1/time")
 
   if(plot) {
 
     cp_plot <- plot_cp(
       .data = .data,
-      power_output_column = power_output_column,
-      time_to_exhaustion_column = time_to_exhaustion_column,
+      power_output_column = {{ power_output_column }},
+      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
       method = "1/time",
       model = model
     )

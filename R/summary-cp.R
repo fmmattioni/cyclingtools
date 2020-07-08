@@ -12,6 +12,7 @@
 #' @return a [tibble][tibble::tibble-package]
 #' @export
 summary_cp <- function(.data, time_to_exhaustion_column, model, method) {
+
   if(method == "3-hyp") {
     # CP
     coeff_cp <- summary(model)$coeff[2,1]
@@ -32,7 +33,7 @@ summary_cp <- function(.data, time_to_exhaustion_column, model, method) {
     coeff_pmax_se <- summary(model)$coeff[3,2]
 
     # R^2
-    r2 <- cor(.data[[time_to_exhaustion_column]], predict(model)) ^ 2
+    r2 <- cor(.data[[{{ time_to_exhaustion_column }}]], predict(model)) ^ 2
 
     # RMSE
     rmse <- summary(model)$sigma
@@ -57,7 +58,7 @@ summary_cp <- function(.data, time_to_exhaustion_column, model, method) {
     coeff_pmax_se <- NA
 
     # R^2
-    r2 <- cor(.data[[time_to_exhaustion_column]], predict(model)) ^ 2
+    r2 <- cor(.data[[{{ time_to_exhaustion_column }}]], predict(model)) ^ 2
 
     # RMSE
     rmse <- summary(model)$sigma

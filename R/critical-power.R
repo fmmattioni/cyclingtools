@@ -103,20 +103,34 @@ critical_power <- function(
   power_in_y_axis = FALSE
 ) {
 
+  if(missing(.data))
+    stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
+
+  ## make sure that column exists
+  if(!power_output_column %in% colnames(.data))
+    stop("It looks like the name of the power output column you chose does not exist.", call. = FALSE)
+
+  if(!time_to_exhaustion_column %in% colnames(.data))
+    stop("It looks like the name of the time-to-exhaustion column you chose does not exist.", call. = FALSE)
+
   ## check method argument
   method <- match.arg(arg = method, several.ok = TRUE)
+
+  ## make sure column names work unquoted too
+  power_output_column <- rlang::ensym(power_output_column)
+  time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
 
   if(all_combinations) {
     combinations <- get_combinations(
       .data = {{ .data }},
-      power_output_column = power_output_column,
-      time_to_exhaustion_column = time_to_exhaustion_column
+      power_output_column = {{ power_output_column }},
+      time_to_exhaustion_column = {{ time_to_exhaustion_column }}
     )
 
     data_pre_processed <- get_indexes(
       .data = {{ .data }},
-      power_output_column = power_output_column,
-      time_to_exhaustion_column = time_to_exhaustion_column,
+      power_output_column = {{ power_output_column }},
+      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
       combinations = combinations
     )
 
@@ -159,8 +173,7 @@ critical_power <- function(
     dplyr::ungroup() %>%
     dplyr::filter(purrr::map_lgl(results, ~!rlang::is_lgl_na(.x))) %>%
     dplyr::select(-data) %>%
-    tidyr::unnest(cols = results) %>%
-    dplyr::mutate_all(function(x) replace(x, x %in% c("NA", "NaN"), ""))
+    tidyr::unnest(cols = results)
 
   if(all_combinations) {
     out <- data_calculated %>%
