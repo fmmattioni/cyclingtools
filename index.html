@@ -142,18 +142,19 @@
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
   plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">FALSE</span>
+  all_combinations = <span class="fl">FALSE</span>,
+  power_in_y_axis = <span class="fl">FALSE</span>
 )
 
 <span class="kw">simple_results</span>
 <span class="co">#&gt; # A tibble: 4 x 12</span>
-<span class="co">#&gt;   method data  model CP    `CP SEE` `W'`  `W' SEE` Pmax  `Pmax SEE` R2    RMSE </span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;</span>
-<span class="co">#&gt; 1 3-hyp  &lt;tib… &lt;nls&gt; 260.3 3.1      2740… 4794     1003… 834.7      0.99… 37.14</span>
-<span class="co">#&gt; 2 2-hyp  &lt;tib… &lt;nls&gt; 262.2 1.6      2417… 1888.9   &lt;NA&gt;  &lt;NA&gt;       0.997 34.7 </span>
-<span class="co">#&gt; 3 linear &lt;tib… &lt;lm&gt;  265.5 3        2096… 2247.9   &lt;NA&gt;  &lt;NA&gt;       0.99… 3149…</span>
-<span class="co">#&gt; 4 1/time &lt;tib… &lt;lm&gt;  273.8 6.2      1778… 1160     &lt;NA&gt;  &lt;NA&gt;       0.98… 9.05 </span>
-<span class="co">#&gt; # … with 1 more variable: plot &lt;list&gt;</span>
+<span class="co">#&gt;   method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2</span>
+<span class="co">#&gt;   &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 3-hyp  &lt;tib… &lt;nls&gt;  260.      3.1 27410.    4794  1004.       835. 0.998</span>
+<span class="co">#&gt; 2 2-hyp  &lt;tib… &lt;nls&gt;  262.      1.6 24174.    1889.   NA         NA  0.997</span>
+<span class="co">#&gt; 3 linear &lt;tib… &lt;lm&gt;   266.      3   20961.    2248.   NA         NA  1.00 </span>
+<span class="co">#&gt; 4 1/time &lt;tib… &lt;lm&gt;   274.      6.2 17784.    1160    NA         NA  0.987</span>
+<span class="co">#&gt; # … with 2 more variables: RMSE &lt;dbl&gt;, plot &lt;list&gt;</span>
 </pre></div>
 <p>You can also plot the results:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
@@ -175,24 +176,25 @@
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
   plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">TRUE</span>
+  all_combinations = <span class="fl">TRUE</span>,
+  power_in_y_axis = <span class="fl">FALSE</span>
 )
 
 <span class="kw">combinations_results</span>
 <span class="co">#&gt; # A tibble: 74 x 13</span>
-<span class="co">#&gt;    index method data  model CP    `CP SEE` `W'`  `W' SEE` Pmax  `Pmax SEE` R2   </span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;</span>
-<span class="co">#&gt;  1 [1,2… 3-hyp  &lt;tib… &lt;nls&gt; 260.3 3.1      2740… 4794     1003… 834.7      0.99…</span>
-<span class="co">#&gt;  2 [1,2… 2-hyp  &lt;tib… &lt;nls&gt; 262.2 1.6      2417… 1888.9   &lt;NA&gt;  &lt;NA&gt;       0.997</span>
-<span class="co">#&gt;  3 [1,2… linear &lt;tib… &lt;lm&gt;  265.5 3        2096… 2247.9   &lt;NA&gt;  &lt;NA&gt;       0.99…</span>
-<span class="co">#&gt;  4 [1,2… 1/time &lt;tib… &lt;lm&gt;  273.8 6.2      1778… 1160     &lt;NA&gt;  &lt;NA&gt;       0.98…</span>
-<span class="co">#&gt;  5 [1,2… 3-hyp  &lt;tib… &lt;nls&gt; 246.5 6.2      4269… 7655     594.8 70.2       0.99…</span>
-<span class="co">#&gt;  6 [1,2… 2-hyp  &lt;tib… &lt;nls&gt; 261.2 4.7      2481… 3690.8   &lt;NA&gt;  &lt;NA&gt;       0.99…</span>
-<span class="co">#&gt;  7 [1,2… linear &lt;tib… &lt;lm&gt;  268.8 5.9      1997… 2877.4   &lt;NA&gt;  &lt;NA&gt;       0.99…</span>
-<span class="co">#&gt;  8 [1,2… 1/time &lt;tib… &lt;lm&gt;  278.4 7.9      1719… 1338.8   &lt;NA&gt;  &lt;NA&gt;       0.98…</span>
-<span class="co">#&gt;  9 [1,2… 3-hyp  &lt;tib… &lt;nls&gt; 255   1.9      3646… 3328.4   626.9 63.7       0.99…</span>
-<span class="co">#&gt; 10 [1,2… 2-hyp  &lt;tib… &lt;nls&gt; 261.7 2.2      2494… 2882.2   &lt;NA&gt;  &lt;NA&gt;       0.99…</span>
-<span class="co">#&gt; # … with 64 more rows, and 2 more variables: RMSE &lt;chr&gt;, plot &lt;list&gt;</span>
+<span class="co">#&gt;    index method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`</span>
+<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  260.      3.1 27410.    4794  1004.      835. </span>
+<span class="co">#&gt;  2 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  262.      1.6 24174.    1889.   NA        NA  </span>
+<span class="co">#&gt;  3 [1,2… linear &lt;tib… &lt;lm&gt;   266.      3   20961.    2248.   NA        NA  </span>
+<span class="co">#&gt;  4 [1,2… 1/time &lt;tib… &lt;lm&gt;   274.      6.2 17784.    1160    NA        NA  </span>
+<span class="co">#&gt;  5 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  246.      6.2 42699.    7655   595.       70.2</span>
+<span class="co">#&gt;  6 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  261.      4.7 24814.    3691.   NA        NA  </span>
+<span class="co">#&gt;  7 [1,2… linear &lt;tib… &lt;lm&gt;   269.      5.9 19977.    2877.   NA        NA  </span>
+<span class="co">#&gt;  8 [1,2… 1/time &lt;tib… &lt;lm&gt;   278.      7.9 17194.    1339.   NA        NA  </span>
+<span class="co">#&gt;  9 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  255       1.9 36462.    3328.  627.       63.7</span>
+<span class="co">#&gt; 10 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  262.      2.2 24940.    2882.   NA        NA  </span>
+<span class="co">#&gt; # … with 64 more rows, and 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, plot &lt;list&gt;</span>
 </pre></div>
 <p>You can also plot the results:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
