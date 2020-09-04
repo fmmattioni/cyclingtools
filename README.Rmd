@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # cyclingtools <img src='man/figures/logo.png' align="right" height="240" />
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN status](https://www.r-pkg.org/badges/version/cyclingtools)](https://CRAN.R-project.org/package=cyclingtools)
 [![R build status](https://github.com/fmmattioni/cyclingtools/workflows/R-CMD-check/badge.svg)](https://github.com/fmmattioni/cyclingtools/actions)
 <!-- badges: end -->
