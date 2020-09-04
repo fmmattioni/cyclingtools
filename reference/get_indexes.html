@@ -148,11 +148,11 @@ of the time-to-exhaustion trials in the different combinations." />
     </div>
 
     <div class="ref-description">
-    <p>This function is used in combination with <code><a href='https://rdrr.io/pkg/cyclingtools/man/get_combinations.html'>get_combinations()</a></code> and it derives the indexes
+    <p>This function is used in combination with <code><a href='get_combinations.html'>get_combinations()</a></code> and it derives the indexes
 of the time-to-exhaustion trials in the different combinations.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/cyclingtools/man/get_indexes.html'>get_indexes</a></span>(
+    <pre class="usage"><span class='fu'>get_indexes</span>(
   <span class='kw'>.data</span>,
   <span class='kw'>power_output_column</span>,
   <span class='kw'>time_to_exhaustion_column</span>,
@@ -176,7 +176,7 @@ of the time-to-exhaustion trials in the different combinations.</p>
     </tr>
     <tr>
       <th>combinations</th>
-      <td><p>The data derived from <code><a href='https://rdrr.io/pkg/cyclingtools/man/get_combinations.html'>get_combinations()</a></code>.</p></td>
+      <td><p>The data derived from <code><a href='get_combinations.html'>get_combinations()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -185,11 +185,12 @@ of the time-to-exhaustion trials in the different combinations.</p>
     <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>combinations</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/cyclingtools/man/get_combinations.html'>get_combinations</a></span>(<span class='kw'>demo_data</span>, <span class='st'>"PO"</span>, <span class='st'>"TTE"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>combinations</span> <span class='op'>&lt;-</span> <span class='fu'><a href='get_combinations.html'>get_combinations</a></span>(<span class='kw'>demo_data</span>, <span class='st'>"PO"</span>, <span class='st'>"TTE"</span>)
 
-<span class='kw'>results_index</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/cyclingtools/man/get_indexes.html'>get_indexes</a></span>(<span class='kw'>demo_data</span>, <span class='st'>"PO"</span>, <span class='st'>"TTE"</span>, <span class='kw'>combinations</span>)
+<span class='kw'>results_index</span> <span class='op'>&lt;-</span> <span class='fu'>get_indexes</span>(<span class='kw'>demo_data</span>, <span class='st'>"PO"</span>, <span class='st'>"TTE"</span>, <span class='kw'>combinations</span>)
 
-<span class='kw'>results_index</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 26 x 2</span><span>
+<span class='kw'>results_index</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 26 x 2</span><span>
 #&gt;    index       data            
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;glue&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          
 #&gt; </span><span style='color: #555555;'> 1</span><span> [1,2,3,4,5] </span><span style='color: #555555;'>&lt;tibble [5 × 2]&gt;</span><span>

@@ -149,10 +149,10 @@ For more details see ?critical_power." />
 
     <div class="ref-description">
     <p>Fits critical power with the 2-parameter hyperbolic model (Hill, 1993).
-For more details see <code><a href='https://rdrr.io/pkg/cyclingtools/man/critical_power.html'>?critical_power</a></code>.</p>
+For more details see <code><a href='critical_power.html'>?critical_power</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/cyclingtools/man/method_2_hyp.html'>method_2_hyp</a></span>(
+    <pre class="usage"><span class='fu'>method_2_hyp</span>(
   <span class='kw'>.data</span>,
   <span class='kw'>power_output_column</span>,
   <span class='kw'>time_to_exhaustion_column</span>,
@@ -203,9 +203,10 @@ For more details see <code><a href='https://rdrr.io/pkg/cyclingtools/man/critica
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>results_2_hyp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/cyclingtools/man/method_2_hyp.html'>method_2_hyp</a></span>(.data = <span class='kw'>demo_data</span>, <span class='st'>"PO"</span>, <span class='st'>"TTE"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>results_2_hyp</span> <span class='op'>&lt;-</span> <span class='fu'>method_2_hyp</span>(.data = <span class='kw'>demo_data</span>, <span class='st'>"PO"</span>, <span class='st'>"TTE"</span>)
 
-<span class='kw'>results_2_hyp</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 11</span><span>
+<span class='kw'>results_2_hyp</span>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 11</span><span>
 #&gt;   data   model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2  RMSE plot 
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lis&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>  </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;lis&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> </span><span style='color: #555555;'>&lt;tibb</span><span>… </span><span style='color: #555555;'>&lt;nls&gt;</span><span>  262.      1.6 </span><span style='text-decoration: underline;'>24</span><span>174.    </span><span style='text-decoration: underline;'>1</span><span>889.    </span><span style='color: #BB0000;'>NA</span><span>         </span><span style='color: #BB0000;'>NA</span><span> 0.997  34.7 </span><span style='color: #555555;'>&lt;gg&gt;</span><span> </div></span></pre>
