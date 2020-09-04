@@ -23,6 +23,7 @@
 #' \item{RMSE}{Root mean square error, the units vary depending on the method, as they represent the units of the response (i.e., y-axis): CP3-hyp in seconds, CP2-hyp in seconds, CPlinear in joules, and CP1/time in watts.}
 #' \item{plot}{The critical power plot.}
 #'
+#' @importFrom rlang :=
 #' @export
 #'
 #' @examples
@@ -46,6 +47,25 @@ method_3_hyp <- function(
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
+  ## if column names contain spaces, fix it with janitor
+  if(grepl(pattern = " ", x = power_output_column)) {
+    power_output_column_rename <- janitor::make_clean_names(string = power_output_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!power_output_column_rename := power_output_column)
+
+    power_output_column <- janitor::make_clean_names(string = power_output_column)
+  }
+
+  if(grepl(pattern = " ", x = time_to_exhaustion_column)) {
+    time_to_exhaustion_column_rename <- janitor::make_clean_names(string = time_to_exhaustion_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!time_to_exhaustion_column_rename := time_to_exhaustion_column)
+
+    time_to_exhaustion_column <- janitor::make_clean_names(string = time_to_exhaustion_column)
+  }
 
   # Setting starting values
   a_start <- max(.data[[{{ power_output_column }}]]) * min(.data[[{{ time_to_exhaustion_column }}]])
@@ -141,6 +161,25 @@ method_2_hyp <- function(
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
 
+  ## if column names contain spaces, fix it with janitor
+  if(grepl(pattern = " ", x = power_output_column)) {
+    power_output_column_rename <- janitor::make_clean_names(string = power_output_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!power_output_column_rename := power_output_column)
+
+    power_output_column <- janitor::make_clean_names(string = power_output_column)
+  }
+
+  if(grepl(pattern = " ", x = time_to_exhaustion_column)) {
+    time_to_exhaustion_column_rename <- janitor::make_clean_names(string = time_to_exhaustion_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!time_to_exhaustion_column_rename := time_to_exhaustion_column)
+
+    time_to_exhaustion_column <- janitor::make_clean_names(string = time_to_exhaustion_column)
+  }
+
   # Setting starting values
   a_start <- max(.data[[{{ power_output_column }}]]) * min(.data[[{{ time_to_exhaustion_column }}]])
   b_start <- min(.data[[{{ power_output_column }}]]) - 30
@@ -228,6 +267,25 @@ method_linear <- function(
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
 
+  ## if column names contain spaces, fix it with janitor
+  if(grepl(pattern = " ", x = power_output_column)) {
+    power_output_column_rename <- janitor::make_clean_names(string = power_output_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!power_output_column_rename := power_output_column)
+
+    power_output_column <- janitor::make_clean_names(string = power_output_column)
+  }
+
+  if(grepl(pattern = " ", x = time_to_exhaustion_column)) {
+    time_to_exhaustion_column_rename <- janitor::make_clean_names(string = time_to_exhaustion_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!time_to_exhaustion_column_rename := time_to_exhaustion_column)
+
+    time_to_exhaustion_column <- janitor::make_clean_names(string = time_to_exhaustion_column)
+  }
+
   # Formula
   cp_formula <- glue::glue("{power_output_column} * {time_to_exhaustion_column} ~ {time_to_exhaustion_column}")
 
@@ -303,6 +361,25 @@ method_1_time <- function(
   ## make sure column names work unquoted too
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
+
+  ## if column names contain spaces, fix it with janitor
+  if(grepl(pattern = " ", x = power_output_column)) {
+    power_output_column_rename <- janitor::make_clean_names(string = power_output_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!power_output_column_rename := power_output_column)
+
+    power_output_column <- janitor::make_clean_names(string = power_output_column)
+  }
+
+  if(grepl(pattern = " ", x = time_to_exhaustion_column)) {
+    time_to_exhaustion_column_rename <- janitor::make_clean_names(string = time_to_exhaustion_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!time_to_exhaustion_column_rename := time_to_exhaustion_column)
+
+    time_to_exhaustion_column <- janitor::make_clean_names(string = time_to_exhaustion_column)
+  }
 
   # Formula
   cp_formula <- glue::glue("{power_output_column} ~ I(1 / {time_to_exhaustion_column})")

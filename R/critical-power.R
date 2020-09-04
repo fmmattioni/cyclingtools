@@ -110,6 +110,25 @@ critical_power <- function(
   power_output_column <- rlang::ensym(power_output_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
 
+  ## if column names contain spaces, fix it with janitor
+  if(grepl(pattern = " ", x = power_output_column)) {
+    power_output_column_rename <- janitor::make_clean_names(string = power_output_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!power_output_column_rename := power_output_column)
+
+    power_output_column <- janitor::make_clean_names(string = power_output_column)
+  }
+
+  if(grepl(pattern = " ", x = time_to_exhaustion_column)) {
+    time_to_exhaustion_column_rename <- janitor::make_clean_names(string = time_to_exhaustion_column)
+
+    .data <- .data %>%
+      dplyr::rename(!!time_to_exhaustion_column_rename := time_to_exhaustion_column)
+
+    time_to_exhaustion_column <- janitor::make_clean_names(string = time_to_exhaustion_column)
+  }
+
   ## check method argument
   method <- match.arg(arg = method, several.ok = TRUE)
 
