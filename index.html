@@ -56,12 +56,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="articles/cyclingtools.html">Get started</a>
 </li>
 <li>
@@ -125,7 +119,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">cyclingtools</span>)
 
-<span class="kw">demo_data</span>
+<span class="kw">demo_critical_power</span>
 <span class="co">#&gt;    PO  TTE</span>
 <span class="co">#&gt; 1 446  100</span>
 <span class="co">#&gt; 2 385  172</span>
@@ -140,13 +134,13 @@
 <p>Perform a simple analysis from the chosen critical power models:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
 <span class="kw">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_data</span>, 
+  .data = <span class="kw">demo_critical_power</span>, 
   power_output_column = <span class="st">"PO"</span>, 
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
   plot = <span class="fl">TRUE</span>, 
   all_combinations = <span class="fl">FALSE</span>,
-  power_in_y_axis = <span class="fl">FALSE</span>
+  reverse_y_axis = <span class="fl">FALSE</span>
 )
 
 <span class="kw">simple_results</span>
@@ -174,13 +168,13 @@
 <p>You can also perform an analysis with all the possible combinations of time-to-exhaustion trials provided. All you need to do is to set <code>all_combinations = TRUE</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="kw">combinations_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_data</span>, 
+  .data = <span class="kw">demo_critical_power</span>, 
   power_output_column = <span class="st">"PO"</span>, 
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
   plot = <span class="fl">TRUE</span>, 
   all_combinations = <span class="fl">TRUE</span>,
-  power_in_y_axis = <span class="fl">FALSE</span>
+  reverse_y_axis = <span class="fl">FALSE</span>
 )
 
 <span class="kw">combinations_results</span>
@@ -209,6 +203,47 @@
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 </div>
 </div>
+<div id="critical-speed" class="section level3">
+<h3 class="hasAnchor">
+<a href="#critical-speed" class="anchor"></a>Critical Speed</h3>
+<div id="demo-data-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#demo-data-1" class="anchor"></a>Demo data</h4>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="kw">demo_critical_speed</span>
+<span class="co">#&gt; # A tibble: 3 x 2</span>
+<span class="co">#&gt;   Distance   TTE</span>
+<span class="co">#&gt;      &lt;int&gt; &lt;int&gt;</span>
+<span class="co">#&gt; 1      956   180</span>
+<span class="co">#&gt; 2     1500   300</span>
+<span class="co">#&gt; 3     3399   720</span>
+</pre></div>
+</div>
+<div id="simple-analysis-1" class="section level4">
+<h4 class="hasAnchor">
+<a href="#simple-analysis-1" class="anchor"></a>Simple analysis</h4>
+<p>Perform a simple analysis from the chosen critical power models:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_speed.html">critical_speed</a></span>(
+  .data = <span class="kw">demo_critical_speed</span>, 
+  distance_column = <span class="st">"Distance"</span>, 
+  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
+  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
+  plot = <span class="fl">TRUE</span>, 
+  all_combinations = <span class="fl">FALSE</span>,
+  reverse_y_axis = <span class="fl">FALSE</span>
+)
+
+<span class="kw">simple_results</span>
+<span class="co">#&gt; # A tibble: 3 x 10</span>
+<span class="co">#&gt;   method data             model     CS `CS SEE`  `D'` `D' SEE`    R2  RMSE plot </span>
+<span class="co">#&gt;   &lt;chr&gt;  &lt;list&gt;           &lt;list&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lis&gt;</span>
+<span class="co">#&gt; 1 2-hyp  &lt;tibble [3 × 3]&gt; &lt;nls&gt;   4.52        0  143.     0.94  1.00  1.43 &lt;gg&gt; </span>
+<span class="co">#&gt; 2 linear &lt;tibble [3 × 3]&gt; &lt;lm&gt;    4.52        0  142.     1     1     0.86 &lt;gg&gt; </span>
+<span class="co">#&gt; 3 1/time &lt;tibble [3 × 3]&gt; &lt;lm&gt;    4.53        0  142.     1.02  1.00  0    &lt;gg&gt;</span>
+</pre></div>
+</div>
+</div>
 <div id="you-can-also-do-all-of-these-analyses-in-our-shiny-app" class="section level3">
 <h3 class="hasAnchor">
 <a href="#you-can-also-do-all-of-these-analyses-in-our-shiny-app" class="anchor"></a>You can also do all of these analyses in our shiny app:</h3>
@@ -231,7 +266,7 @@
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
-<div class="sourceCode" id="cb7"><pre class="downlit">
+<div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"cyclingtools"</span>)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Maturana M, Felipe, Fontana, Y F, Pogliaghi, Silvia, Passfield, Louis,</span>
@@ -297,7 +332,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -56,12 +56,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../articles/cyclingtools.html">Get started</a>
 </li>
 <li>
@@ -124,13 +118,13 @@ If you have a suggestion, feel free to open an issue.
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">cyclingtools</span>)
 
 <span class="kw">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_data</span>, 
+  .data = <span class="kw">demo_critical_power</span>, 
   power_output_column = <span class="st">"PO"</span>, 
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
   plot = <span class="fl">TRUE</span>, 
   all_combinations = <span class="fl">FALSE</span>,
-  power_in_y_axis = <span class="fl">FALSE</span>
+  reverse_y_axis = <span class="fl">FALSE</span>
 )
 
 <span class="kw">simple_results</span>
@@ -146,13 +140,13 @@ If you have a suggestion, feel free to open an issue.
 <p>In the above example, we chose to fit critical power on all the available methods, but you can also just choose one or two:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_data</span>, 
+  .data = <span class="kw">demo_critical_power</span>, 
   power_output_column = <span class="st">"PO"</span>, 
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>), 
   plot = <span class="fl">TRUE</span>, 
   all_combinations = <span class="fl">FALSE</span>,
-  power_in_y_axis = <span class="fl">FALSE</span>
+  reverse_y_axis = <span class="fl">FALSE</span>
 )
 <span class="co">#&gt; # A tibble: 2 x 12</span>
 <span class="co">#&gt;   method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2  RMSE</span>
@@ -173,15 +167,15 @@ If you have a suggestion, feel free to open an issue.
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameters:</span>
 <span class="co">#&gt;       Estimate Std. Error t value Pr(&gt;|t|)    </span>
-<span class="co">#&gt; AWC  27409.920   4794.043   5.717 0.029255 *  </span>
+<span class="co">#&gt; AWC  27409.928   4794.045   5.717 0.029255 *  </span>
 <span class="co">#&gt; CP     260.267      3.097  84.038 0.000142 ***</span>
-<span class="co">#&gt; Pmax  1003.833    834.679   1.203 0.352171    </span>
+<span class="co">#&gt; Pmax  1003.832    834.676   1.203 0.352171    </span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Residual standard error: 37.14 on 2 degrees of freedom</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Number of iterations to convergence: 6 </span>
+<span class="co">#&gt; Number of iterations to convergence: 5 </span>
 <span class="co">#&gt; Achieved convergence tolerance: 1.49e-08</span>
 </pre></div>
 <p>Or the <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">broom::tidy()</a></code> function:</p>
@@ -225,13 +219,13 @@ If you have a suggestion, feel free to open an issue.
 <p>The <code>all_combinations</code> argument let you decide whether to perform multiple fits from all the possible combinations of trials provided:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw">combinations_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_data</span>, 
+  .data = <span class="kw">demo_critical_power</span>, 
   power_output_column = <span class="st">"PO"</span>, 
   time_to_exhaustion_column = <span class="st">"TTE"</span>, 
   method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
   plot = <span class="fl">TRUE</span>, 
   all_combinations = <span class="fl">TRUE</span>,
-  power_in_y_axis = <span class="fl">FALSE</span>
+  reverse_y_axis = <span class="fl">FALSE</span>
 )
 
 <span class="kw">combinations_results</span>
@@ -259,35 +253,6 @@ If you have a suggestion, feel free to open an issue.
 </pre></div>
 <p><img src="cyclingtools_files/figure-html/unnamed-chunk-9-1.png" width="2187.5" style="display: block; margin: auto;"></p>
 </div>
-<div id="individual-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#individual-functions" class="anchor"></a>Individual functions</h2>
-<p>Please, note that <code><a href="../reference/critical_power.html">critical_power()</a></code> is a general function that makes your life easier. However, you can also call the individual functions of each method:</p>
-<ul>
-<li>
-<code><a href="../reference/method_3_hyp.html">method_3_hyp()</a></code> = 3-parameter hyperbolic model</li>
-<li>
-<code><a href="../reference/method_2_hyp.html">method_2_hyp()</a></code> = 2-parameter hyperbolic model</li>
-<li>
-<code><a href="../reference/method_linear.html">method_linear()</a></code> = linear model</li>
-<li>
-<code><a href="../reference/method_1_time.html">method_1_time()</a></code> = 1/time linear model</li>
-</ul>
-<p>Example:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="../reference/method_3_hyp.html">method_3_hyp</a></span>(
-  .data = <span class="kw">demo_data</span>, 
-  power_output_column = <span class="st">"PO"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  plot = <span class="fl">TRUE</span>,
-  power_in_y_axis = <span class="fl">FALSE</span>
-)
-<span class="co">#&gt; # A tibble: 1 x 11</span>
-<span class="co">#&gt;   data   model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2  RMSE plot </span>
-<span class="co">#&gt;   &lt;list&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lis&gt;</span>
-<span class="co">#&gt; 1 &lt;tibb… &lt;nls&gt;  260.      3.1 27410.     4794 1004.       835. 0.998  37.1 &lt;gg&gt;</span>
-</pre></div>
-</div>
 <div id="shiny-app" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny-app" class="anchor"></a>Shiny app</h2>
@@ -310,7 +275,7 @@ If you have a suggestion, feel free to open an issue.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

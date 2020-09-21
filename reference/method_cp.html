@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot CP model — plot_cp • cyclingtools</title>
+<title>CP models — method_cp • cyclingtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -48,8 +48,15 @@
   <link href="../extra.css" rel="stylesheet">
   
 
-<meta property="og:title" content="Plot CP model — plot_cp" />
-<meta property="og:description" content="Plot CP model" />
+<meta property="og:title" content="CP models — method_cp" />
+<meta property="og:description" content="These functions fit the following critical power/speed models: 
+3-parameter hyperbolic model (Morton, 1996). 
+2-parameter hyperbolic model (Hill, 1993). 
+linear model (Moritani, 1981). 
+1/time linear model (Whipp et al. 1982). 
+For more details see ?critical_power or ?critical_speed.
+
+" />
 <meta property="og:image" content="/reference/figures/logo.png" />
 <meta property="og:image:alt" content="Tools for Manipulating Cycling Data" />
 <meta name="twitter:card" content="summary_large_image" />
@@ -138,21 +145,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot CP model</h1>
+    <h1>CP models</h1>
     
-    <div class="hidden name"><code>plot_cp.Rd</code></div>
+    <div class="hidden name"><code>method_cp.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Plot CP model</p>
+    <p>These functions fit the following critical power/speed models: <br /></p><ul>
+<li><p>3-parameter hyperbolic model (Morton, 1996). <br /></p></li>
+<li><p>2-parameter hyperbolic model (Hill, 1993). <br /></p></li>
+<li><p>linear model (Moritani, 1981). <br /></p></li>
+<li><p>1/time linear model (Whipp et al. 1982). <br />
+For more details see <code><a href='critical_power.html'>?critical_power</a></code> or <code><a href='critical_speed.html'>?critical_speed</a></code>.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>plot_cp</span>(
+    <pre class="usage"><span class='fu'>method_cp</span>(
   <span class='kw'>.data</span>,
   <span class='kw'>power_output_column</span>,
-  <span class='kw'>time_to_exhaustion_column</span>,
+  <span class='kw'>distance_column</span>,
+  time_to_exhaustion_column = <span class='st'>"TTE"</span>,
   method = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"3-hyp"</span>, <span class='st'>"2-hyp"</span>, <span class='st'>"linear"</span>, <span class='st'>"1/time"</span>),
-  <span class='kw'>model</span>
+  mode = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"power"</span>, <span class='st'>"speed"</span>),
+  plot = <span class='fl'>TRUE</span>,
+  reverse_y_axis = <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -160,11 +177,15 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A data frame containing a power output column and their respective time-to-exhaustion.</p></td>
+      <td><p>A data frame containing a power output/distance column and their respective time-to-exhaustion.</p></td>
     </tr>
     <tr>
       <th>power_output_column</th>
-      <td><p>The name of the power output column. This value has to be in watts. Default to <code>"PO"</code>.</p></td>
+      <td><p>The name of the power output column. This value has to be in watts. Used in the 'power' mode only.</p></td>
+    </tr>
+    <tr>
+      <th>distance_column</th>
+      <td><p>The name of the distance column. This value has to be in meters. Used in the 'speed' mode only.</p></td>
     </tr>
     <tr>
       <th>time_to_exhaustion_column</th>
@@ -172,17 +193,38 @@
     </tr>
     <tr>
       <th>method</th>
-      <td><p>The method for estimating critical power. It can be one of <code><a href='https://rdrr.io/r/base/c.html'>c("3-hyp", "2-hyp", "linear", "1/time")</a></code>.</p></td>
+      <td><p>The method for estimating critical speed. It can be one or multiple methods. Default to <code><a href='https://rdrr.io/r/base/c.html'>c("3-hyp", "2-hyp", "linear", "1/time")</a></code>.</p></td>
     </tr>
     <tr>
-      <th>model</th>
-      <td><p>The <code>nls</code> or <code>lm</code> object derived in one of the <code>method_</code> functions.</p></td>
+      <th>mode</th>
+      <td><p>Specify 'power' for critical power, and 'speed' for critical speed.</p></td>
+    </tr>
+    <tr>
+      <th>plot</th>
+      <td><p>A boolean indicating whether to produce a plot from the critical power/speed estimation. Default to <code>TRUE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>reverse_y_axis</th>
+      <td><p>A boolean to indicate whether to plot the Power Output (W) or Speed (m/s) in the y-axis. It is ignored for the linear methods. Default to <code>FALSE</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code>ggplot2</code> object</p>
+    <p>a <a href='https://tibble.tidyverse.org/reference/tibble-package.html'>tibble</a> containing the following columns:</p>
+<dt>method</dt><dd><p>The critical power method for that estimation.</p></dd>
+<dt>data</dt><dd><p>The data you provided.</p></dd>
+<dt>model</dt><dd><p>A <code>nls</code> or <code>lm</code> object. The model used in the critical power fitting.</p></dd>
+<dt>CP or CS</dt><dd><p>Critical power, in watts, or critical speed, in meters per second.</p></dd>
+<dt>CP SEE or CS SEE</dt><dd><p>Standard error of the estimation of critical power, in watts, or critical speed, in meters per second.</p></dd>
+<dt>W' or D'</dt><dd><p>Anaerobic work capacity, in joules, or anaerobic distance capacity, in meters.</p></dd>
+<dt>W' or D' SEE</dt><dd><p>Standard error of the estimation of anaerobic work capacity, in joules, or anaerobic distance capacity, in meters.</p></dd>
+<dt>Pmax or Smax</dt><dd><p>Maximal instantaneous power/speed, in watts/meters per second (only available in CP/CS 3-hyp).</p></dd>
+<dt>Pmax SEE or Smax SEE</dt><dd><p>Standard error of the estimation of maximal instantaneous power/speed, in watts/meters per second (only available in CP/CS 3-hyp).</p></dd>
+<dt>R2</dt><dd><p>R-squared.</p></dd>
+<dt>RMSE</dt><dd><p>Root mean square error, the units vary depending on the method, as they represent the units of the response (i.e., y-axis): CP3-hyp in seconds, CP2-hyp in seconds, CPlinear in joules, and CP1/time in watts.</p></dd>
+<dt>plot</dt><dd><p>The critical power plot.</p></dd>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
