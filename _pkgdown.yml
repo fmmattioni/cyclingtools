@@ -32,17 +32,18 @@ navbar:
     href: https://twitter.com/felipe_mattioni
 
 reference:
-- title: Critical power analysis
+- title: Critical power/speed analyses
   desc: >
-    Perform critical power estimations from a series of time-to-exhaustion trials.
+    Perform critical power/speed estimations from a series of time-to-exhaustion trials.
   contents:
   - critical_power
-  - starts_with("method")
+  - critical_speed
   - plot_cp
   - summary_cp
   - starts_with("get")
 - title: Data
   desc: >
-    Demomstration data for critical power analysis
+    Demomstration data for critical power/speed analyses
   contents:
-  - demo_data
+  - demo_critical_power
+  - demo_critical_speed

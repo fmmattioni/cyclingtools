@@ -28,9 +28,9 @@ This function is used in combination with \code{get_combinations()} and it deriv
 of the time-to-exhaustion trials in the different combinations.
 }
 \examples{
-combinations <- get_combinations(demo_data, "PO", "TTE")
+combinations <- get_combinations(demo_critical_power, "PO", "TTE")
 
-results_index <- get_indexes(demo_data, "PO", "TTE", combinations)
+results_index <- get_indexes(demo_critical_power, "PO", "TTE", combinations)
 
 results_index
 }

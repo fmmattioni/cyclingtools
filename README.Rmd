@@ -42,7 +42,7 @@ The package comes with a demonstration data frame to show how the functions work
 ```{r}
 library(cyclingtools)
 
-demo_data
+demo_critical_power
 ```
 
 #### Simple analysis
@@ -51,13 +51,13 @@ Perform a simple analysis from the chosen critical power models:
 
 ```{r}
 simple_results <- critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
   all_combinations = FALSE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 
 simple_results
@@ -77,13 +77,13 @@ You can also perform an analysis with all the possible combinations of time-to-e
 
 ```{r}
 combinations_results <- critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
   all_combinations = TRUE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 
 combinations_results
@@ -95,6 +95,32 @@ You can also plot the results:
 combinations_results %>% 
   dplyr::slice(1) %>% 
   dplyr::pull(plot)
+```
+
+### Critical Speed
+
+#### Demo data
+
+```{r}
+demo_critical_speed
+```
+
+#### Simple analysis
+
+Perform a simple analysis from the chosen critical power models:
+
+```{r}
+simple_results <- critical_speed(
+  .data = demo_critical_speed, 
+  distance_column = "Distance", 
+  time_to_exhaustion_column = "TTE", 
+  method = c("3-hyp", "2-hyp", "linear", "1/time"), 
+  plot = TRUE, 
+  all_combinations = FALSE,
+  reverse_y_axis = FALSE
+)
+
+simple_results
 ```
 
 ### You can also do all of these analyses in our shiny app:

@@ -18,12 +18,22 @@ plot_cp <- function(
 
   method <- match.arg(method)
 
+  if(power_output_column == "speed") {
+    new_data_seq <- 0.01
+    intensity_label <- "Speed (m/s)"
+    linear_label <- "Distance (m)"
+  } else {
+    new_data_seq <- 1
+    intensity_label <- "Power Output (W)"
+    linear_label <- "Work (J)"
+  }
+
   if(method == "3-hyp") {
     min_power_output <- min(.data[[{{ power_output_column }}]])
     max_power_output <- max(.data[[{{ power_output_column }}]])
 
     new_data <- dplyr::tibble(
-      !!{{ power_output_column }} := seq(min_power_output, max_power_output, 1)
+      !!{{ power_output_column }} := seq(min_power_output, max_power_output, new_data_seq)
     )
 
     data_plot <- broom::augment(model, newdata = new_data)
@@ -34,7 +44,7 @@ plot_cp <- function(
       ggplot2::geom_line(colour = "red", size = 1) +
       ggplot2::geom_point(data = .data, shape = 21, size = 4) +
       ggplot2::scale_y_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE)) +
-      ggplot2::labs(x = "Power Output (W)",
+      ggplot2::labs(x = intensity_label,
                     y = "Time-to-exhaustion (s)",
                     title = bquote(CP[3-hyp])) +
       ggplot2::theme_light()
@@ -44,7 +54,7 @@ plot_cp <- function(
     max_power_output <- max(.data[[{{ power_output_column }}]])
 
     new_data <- dplyr::tibble(
-      !!{{ power_output_column }} := seq(min_power_output, max_power_output, 1)
+      !!{{ power_output_column }} := seq(min_power_output, max_power_output, new_data_seq)
     )
 
     data_plot <- broom::augment(model, newdata = new_data)
@@ -55,7 +65,7 @@ plot_cp <- function(
       ggplot2::geom_line(colour = "red", size = 1) +
       ggplot2::geom_point(data = .data, shape = 21, size = 4) +
       ggplot2::scale_y_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE)) +
-      ggplot2::labs(x = "Power Output (W)",
+      ggplot2::labs(x = intensity_label,
                     y = "Time-to-exhaustion (s)",
                     title = bquote(CP[2-hyp])) +
       ggplot2::theme_light()
@@ -68,7 +78,7 @@ plot_cp <- function(
       ggplot2::scale_x_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE)) +
       ggplot2::scale_y_continuous(labels = function(x) format(x, big.mark = ",", scientific = FALSE)) +
       ggplot2::labs(x = "Time-to-exhaustion (s)",
-                    y = "Work (J)",
+                    y = linear_label,
                     title = bquote(CP[linear])) +
       ggplot2::theme_light()
 
@@ -80,7 +90,7 @@ plot_cp <- function(
       ggplot2::geom_point(data = .data, shape = 21, size = 4) +
       ggplot2::scale_y_continuous(labels = function(x) format(x, scientific = FALSE)) +
       ggplot2::labs(x = "Time-to-exhaustion (1/s)",
-                    y = "Power Output (W)",
+                    y = intensity_label,
                     title = bquote(CP[1/time])) +
       ggplot2::theme_light()
   }

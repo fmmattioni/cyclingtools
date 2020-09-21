@@ -35,13 +35,13 @@ Let's look at the main functionality:
 library(cyclingtools)
 
 simple_results <- critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
   all_combinations = FALSE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 
 simple_results
@@ -51,13 +51,13 @@ In the above example, we chose to fit critical power on all the available method
 
 ```{r}
 critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp"), 
   plot = TRUE, 
   all_combinations = FALSE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 ```
 
@@ -97,13 +97,13 @@ The `all_combinations` argument let you decide whether to perform multiple fits 
 
 ```{r}
 combinations_results <- critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
   all_combinations = TRUE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 
 combinations_results
@@ -115,27 +115,6 @@ You can also check the plots of each estimation in case you set `plot = TRUE`:
 combinations_results %>% 
   dplyr::slice(10) %>% 
   dplyr::pull(plot)
-```
-
-## Individual functions
-
-Please, note that `critical_power()` is a general function that makes your life easier. However, you can also call the individual functions of each method:
-
-* `method_3_hyp()` = 3-parameter hyperbolic model
-* `method_2_hyp()` = 2-parameter hyperbolic model
-* `method_linear()` = linear model
-* `method_1_time()` = 1/time linear model
-
-Example:
-
-```{r}
-method_3_hyp(
-  .data = demo_data, 
-  power_output_column = "PO", 
-  time_to_exhaustion_column = "TTE", 
-  plot = TRUE,
-  power_in_y_axis = FALSE
-)
 ```
 
 ## Shiny app

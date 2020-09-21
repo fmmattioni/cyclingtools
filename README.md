@@ -38,7 +38,7 @@ functions work and also to show you how you can setup your data:
 ``` r
 library(cyclingtools)
 
-demo_data
+demo_critical_power
 #>    PO  TTE
 #> 1 446  100
 #> 2 385  172
@@ -53,13 +53,13 @@ Perform a simple analysis from the chosen critical power models:
 
 ``` r
 simple_results <- critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
   all_combinations = FALSE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 
 simple_results
@@ -92,13 +92,13 @@ time-to-exhaustion trials provided. All you need to do is to set
 
 ``` r
 combinations_results <- critical_power(
-  .data = demo_data, 
+  .data = demo_critical_power, 
   power_output_column = "PO", 
   time_to_exhaustion_column = "TTE", 
   method = c("3-hyp", "2-hyp", "linear", "1/time"), 
   plot = TRUE, 
   all_combinations = TRUE,
-  power_in_y_axis = FALSE
+  reverse_y_axis = FALSE
 )
 
 combinations_results
@@ -128,6 +128,44 @@ combinations_results %>%
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+### Critical Speed
+
+#### Demo data
+
+``` r
+demo_critical_speed
+#> # A tibble: 3 x 2
+#>   Distance   TTE
+#>      <int> <int>
+#> 1      956   180
+#> 2     1500   300
+#> 3     3399   720
+```
+
+#### Simple analysis
+
+Perform a simple analysis from the chosen critical power models:
+
+``` r
+simple_results <- critical_speed(
+  .data = demo_critical_speed, 
+  distance_column = "Distance", 
+  time_to_exhaustion_column = "TTE", 
+  method = c("3-hyp", "2-hyp", "linear", "1/time"), 
+  plot = TRUE, 
+  all_combinations = FALSE,
+  reverse_y_axis = FALSE
+)
+
+simple_results
+#> # A tibble: 3 x 10
+#>   method data             model     CS `CS SEE`  `D'` `D' SEE`    R2  RMSE plot 
+#>   <chr>  <list>           <list> <dbl>    <dbl> <dbl>    <dbl> <dbl> <dbl> <lis>
+#> 1 2-hyp  <tibble [3 × 3]> <nls>   4.52        0  143.     0.94  1.00  1.43 <gg> 
+#> 2 linear <tibble [3 × 3]> <lm>    4.52        0  142.     1     1     0.86 <gg> 
+#> 3 1/time <tibble [3 × 3]> <lm>    4.53        0  142.     1.02  1.00  0    <gg>
+```
 
 ### You can also do all of these analyses in our shiny app:
 

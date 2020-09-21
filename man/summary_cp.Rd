@@ -4,7 +4,13 @@
 \alias{summary_cp}
 \title{CP modeling summary}
 \usage{
-summary_cp(.data, time_to_exhaustion_column, model, method)
+summary_cp(
+  .data,
+  time_to_exhaustion_column,
+  model,
+  method,
+  critical_speed = FALSE
+)
 }
 \arguments{
 \item{.data}{A data frame containing a power output column and their respective time-to-exhaustion.}
@@ -14,6 +20,8 @@ summary_cp(.data, time_to_exhaustion_column, model, method)
 \item{model}{The \code{nls} or \code{lm} object derived in one of the \code{method_} functions.}
 
 \item{method}{The method for estimating critical power. It can be one of \code{c("3-hyp", "2-hyp", "linear", "1/time")}.}
+
+\item{critical_speed}{A boolean to specify whether the estimation of critical speed is being performed, instead of critical power. Default to \code{FALSE}.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble}

@@ -1,15 +1,15 @@
-#' Critical Power
+#' Critical Speed
 #'
 #' @description
-#' Performs critical power estimations based on the methods chosen.
+#' Performs critical speed estimations based on the methods chosen.
 #'
-#' @param .data A data frame containing a power output column and their respective time-to-exhaustion.
-#' @param power_output_column The name of the power output column. This value has to be in watts.
+#' @param .data A data frame containing a distance column and their respective time-to-exhaustion.
+#' @param distance_column The name of the distance column. This value has to be in meters.
 #' @param time_to_exhaustion_column The name of the time-to-exhaustion column. This value has to be in seconds. Default to `"TTE"`.
-#' @param method The method for estimating critical power. It can be one or multiple methods. Default to `c("3-hyp", "2-hyp", "linear", "1/time")`.
-#' @param plot A boolean indicating whether to produce a plot from the critical power estimation. Default to `TRUE`.
-#' @param reverse_y_axis A boolean to indicate whether to plot the Power Output (W) in the y-axis. It is ignored for the linear methods. Default to `FALSE`.
-#' @param all_combinations A boolean indicating whether to perform the critical power estimation from all the possible combinations of time-to-exhaustion trials provided. Please, see 'Details' for more information. Default to `FALSE`.
+#' @param method The method for estimating critical speed. It can be one or multiple methods. Default to `c("3-hyp", "2-hyp", "linear", "1/time")`.
+#' @param plot A boolean indicating whether to produce a plot from the critical speed estimation. Default to `TRUE`.
+#' @param reverse_y_axis A boolean to indicate whether to plot the Speed (m/s) in the y-axis. It is ignored for the linear methods. Default to `FALSE`.
+#' @param all_combinations A boolean indicating whether to perform the critical speed estimation from all the possible combinations of time-to-exhaustion trials provided. Please, see 'Details' for more information. Default to `FALSE`.
 #'
 #' @details
 #' Please, note that estimations of critical power are highly influenced by the range
@@ -22,31 +22,31 @@
 #' The 3-parameter hyperbolic model is calculated as the following (Morton, 1996):
 #'
 #' \loadmathjax
-#' \mjdeqn{t=\frac{W'}{PO-CP}+\frac{W'}{CP-P_{max}}}{t=W'/(PO-CP) + W'/(CP-Pmax)}
+#' \mjdeqn{t=\frac{W'}{speed-CS}+\frac{W'}{CS-S_{max}}}{t=W'/(speed-CS) + W'/(CS-Smax)}
 #'
 #' ## CP 2-hyp
 #'
 #' The 2-parameter hyperbolic model is calculated as the following (Hill, 1993):
 #'
-#' \mjdeqn{t=\frac{W'}{PO-CP}}{t=W'/(PO-CP)}
+#' \mjdeqn{t=\frac{W'}{speed-CS}}{t=W'/(speed-CS)}
 #'
 #' ## CP linear
 #'
 #' The linear model is calculated as the following (Moritani et al. 1981):
 #'
-#' \mjdeqn{W_{lim}=W'+CP\cdot t}{Wlim=W'+CP*t}
+#' \mjdeqn{W_{lim}=W'+CP\cdot t}{Wlim=W'+CS*t}
 #'
 #' ## CP 1/time
 #'
 #' The 1/time linear model is calculated as the following (Whipp et al. 1982):
 #'
-#' \mjdeqn{PO=W'\cdot \frac{1}{t}+CP}{PO=W'*(1/t)+CP}
+#' \mjdeqn{speed=W'\cdot \frac{1}{t}+CS}{speed=W'*(1/t)+CS}
 #'
 #' ## All combinations
 #'
 #' When the argument `all_combinations = TRUE`, the function takes the given data and finds all the
 #' possible combinations of the trials given. For example, if 5 trials are provided (i.e., your data contains 5 rows),
-#' critical power will be fitted with all the 5 trials, then all the possible combinations using only 4 trials, and so on.
+#' critical speed will be fitted with all the 5 trials, then all the possible combinations using only 4 trials, and so on.
 #' This feature was inspired on our paper Mattioni Maturana et al. (2018).
 #'
 #' When all the combinations are fitted, an extra column called "index" appears in the final results.
@@ -66,16 +66,16 @@
 #'
 #'
 #' @return a [tibble][tibble::tibble-package] containing the following columns:
-#' \item{index}{In case `all_combinations = TRUE` this column indicates the row number of the trials chosen for the critical power estimation. They correspond to the row numbers in your data.}
-#' \item{method}{The critical power method for that estimation.}
+#' \item{index}{In case `all_combinations = TRUE` this column indicates the row number of the trials chosen for the critical speed estimation. They correspond to the row numbers in your data.}
+#' \item{method}{The critical speed method for that estimation.}
 #' \item{data}{The data you provided.}
-#' \item{model}{A `nls` or `lm` object. The model used in the critical power fitting.}
-#' \item{CP}{Critical power, in watts.}
-#' \item{CP SEE}{Standard error of the estimation of critical power, in watts.}
-#' \item{W'}{Anaerobic work capacity, in joules.}
-#' \item{W' SEE}{Standard error of the estimation of anaerobic work capacity, in joules.}
-#' \item{Pmax}{Maximal instantaneous power, in watts (only available in CP 3-hyp).}
-#' \item{Pmax SEE}{Standard error of the estimation of maximal instantaneous power, in watts (only available in CP 3-hyp).}
+#' \item{model}{A `nls` or `lm` object. The model used in the critical speed fitting.}
+#' \item{CS}{Critical speed, in meters per second.}
+#' \item{CS SEE}{Standard error of the estimation of critical speed, in meters per second.}
+#' \item{D'}{Anaerobic distance capacity, in joules.}
+#' \item{D' SEE}{Standard error of the estimation of anaerobic work capacity, in joules.}
+#' \item{Smax}{Maximal instantaneous speed, in meters per second (only available in CP 3-hyp).}
+#' \item{Smax SEE}{Standard error of the estimation of maximal instantaneous seed, in meters per second (only available in CP 3-hyp).}
 #' \item{R2}{R-squared.}
 #' \item{RMSE}{Root mean square error, the units vary depending on the method, as they represent the units of the response (i.e., y-axis): CP3-hyp in seconds, CP2-hyp in seconds, CPlinear in joules, and CP1/time in watts.}
 #' \item{plot}{The critical power plot.}
@@ -83,9 +83,9 @@
 #' @export
 #'
 #' @examples
-#' results <- critical_power(
-#'  .data = demo_critical_power,
-#'  power_output_column = "PO",
+#' results <- critical_speed(
+#'  .data = demo_critical_speed,
+#'  distance_column = "Distance",
 #'  time_to_exhaustion_column = "TTE",
 #'  method = c("3-hyp", "2-hyp", "linear", "1/time"),
 #'  plot = TRUE,
@@ -93,9 +93,9 @@
 #' )
 #'
 #' results
-critical_power <- function(
+critical_speed <- function(
   .data,
-  power_output_column = "PO",
+  distance_column,
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
   plot = TRUE,
@@ -106,24 +106,24 @@ critical_power <- function(
   if(missing(.data))
     stop("No data, no fun. Please, include your data to the function.", call. = FALSE)
 
-  if(missing(power_output_column))
-    stop("You need to specify the 'power_output_column' argument for the 'power' mode", call. = FALSE)
+  if(missing(distance_column))
+    stop("You need to specify the 'distance_column' argument for the 'speed' mode", call. = FALSE)
 
   ## make sure column names work unquoted too
-  power_output_column <- rlang::ensym(power_output_column)
+  distance_column <- rlang::ensym(distance_column)
   time_to_exhaustion_column <- rlang::ensym(time_to_exhaustion_column)
 
-  if(any(!colnames(.data) %in% c(power_output_column, time_to_exhaustion_column)))
+  if(any(!colnames(.data) %in% c(distance_column, time_to_exhaustion_column)))
     stop("It looks like the column names you specified do not exist.", call. = FALSE)
 
   ## if column names contain spaces, fix it with janitor
-  if(grepl(pattern = " ", x = power_output_column)) {
-    power_output_column_rename <- janitor::make_clean_names(string = power_output_column)
+  if(grepl(pattern = " ", x = distance_column)) {
+    distance_column_rename <- janitor::make_clean_names(string = distance_column)
 
     .data <- .data %>%
-      dplyr::rename(!!power_output_column_rename := power_output_column)
+      dplyr::rename(!!distance_column_rename := distance_column)
 
-    power_output_column <- janitor::make_clean_names(string = power_output_column)
+    distance_column <- janitor::make_clean_names(string = distance_column)
   }
 
   if(grepl(pattern = " ", x = time_to_exhaustion_column)) {
@@ -141,13 +141,13 @@ critical_power <- function(
   if(all_combinations) {
     combinations <- get_combinations(
       .data = {{ .data }},
-      power_output_column = {{ power_output_column }},
+      power_output_column = {{ distance_column }},
       time_to_exhaustion_column = {{ time_to_exhaustion_column }}
     )
 
     data_pre_processed <- get_indexes(
       .data = {{ .data }},
-      power_output_column = {{ power_output_column }},
+      power_output_column = {{ distance_column }},
       time_to_exhaustion_column = {{ time_to_exhaustion_column }},
       combinations = combinations
     )
@@ -162,10 +162,10 @@ critical_power <- function(
     dplyr::rowwise() %>%
     dplyr::mutate(results = method_cp(
       .data = data,
-      power_output_column = power_output_column,
+      distance_column = distance_column,
       time_to_exhaustion_column = time_to_exhaustion_column,
       method = method,
-      mode = "power",
+      mode = "speed",
       plot = {{ plot }},
       reverse_y_axis = {{ reverse_y_axis }}
     ) %>% list()) %>%
@@ -197,7 +197,7 @@ critical_power <- function(
       dplyr::ungroup()
   }
 
-  ## this excludes the Pmax and Pmax SEE columns in case 3-hyp was not chosen
+  ## this excludes the Smax and Smax SEE columns in case 3-hyp was not chosen
   out <- out %>%
     janitor::remove_empty(which = "cols") %>%
     ## make sure empty cells are displayed as NA

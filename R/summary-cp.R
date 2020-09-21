@@ -6,12 +6,13 @@
 #' @param time_to_exhaustion_column The name of the time-to-exhaustion column. This value has to be in seconds. Default to `"TTE"`.
 #' @param model The `nls` or `lm` object derived in one of the `method_` functions.
 #' @param method The method for estimating critical power. It can be one of `c("3-hyp", "2-hyp", "linear", "1/time")`.
+#' @param critical_speed A boolean to specify whether the estimation of critical speed is being performed, instead of critical power. Default to `FALSE`.
 #'
 #' @importFrom stats cor lm predict
 #'
 #' @return a [tibble][tibble::tibble-package]
 #' @export
-summary_cp <- function(.data, time_to_exhaustion_column, model, method) {
+summary_cp <- function(.data, time_to_exhaustion_column, model, method, critical_speed = FALSE) {
 
   if(method == "3-hyp") {
     # CP
@@ -115,17 +116,31 @@ summary_cp <- function(.data, time_to_exhaustion_column, model, method) {
   }
 
   # Final summary
-  out <- dplyr::tibble(
-    model = list(model),
-    CP = round(coeff_cp, digits = 1),
-    "CP SEE" = round(coeff_cp_se, digits = 1),
-    "W'" = round(coeff_awc, digits = 1),
-    "W' SEE" = round(coeff_awc_se, digits = 1),
-    "Pmax" = round(coeff_pmax, digits = 1),
-    "Pmax SEE" = round(coeff_pmax_se, digits = 1),
-    "R2" = round(r2, digits = 5),
-    "RMSE" = round(rmse, digits = 2)
-  )
+  if(critical_speed) {
+    out <- dplyr::tibble(
+      model = list(model),
+      CS = round(coeff_cp, digits = 2),
+      "CS SEE" = round(coeff_cp_se, digits = 2),
+      "D'" = round(coeff_awc, digits = 2),
+      "D' SEE" = round(coeff_awc_se, digits = 2),
+      "Smax" = round(coeff_pmax, digits = 2),
+      "Smax SEE" = round(coeff_pmax_se, digits = 2),
+      "R2" = round(r2, digits = 5),
+      "RMSE" = round(rmse, digits = 2)
+    )
+  } else {
+    out <- dplyr::tibble(
+      model = list(model),
+      CP = round(coeff_cp, digits = 1),
+      "CP SEE" = round(coeff_cp_se, digits = 1),
+      "W'" = round(coeff_awc, digits = 1),
+      "W' SEE" = round(coeff_awc_se, digits = 1),
+      "Pmax" = round(coeff_pmax, digits = 1),
+      "Pmax SEE" = round(coeff_pmax_se, digits = 1),
+      "R2" = round(r2, digits = 5),
+      "RMSE" = round(rmse, digits = 2)
+    )
+  }
 
   out
 }

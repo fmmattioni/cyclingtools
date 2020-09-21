@@ -22,7 +22,7 @@ VignetteBuilder: knitr
 Imports: 
     magrittr (>= 1.5),
     mathjaxr (>= 1.0.1),
-    broom (>= 0.5.6),
+    broom (>= 0.7.0),
     dplyr (>= 1.0.0),
     forcats (>= 0.5.0),
     ggplot2 (>= 3.3.2),
@@ -30,7 +30,7 @@ Imports:
     janitor (>= 2.0.1),
     minpack.lm (>= 1.2.1),
     purrr (>= 0.3.4),
-    rlang (>= 0.4.6),
+    rlang (>= 0.4.7),
     tibble (>= 3.0.1),
     tidyr (>= 1.1.0)
 Depends: 
