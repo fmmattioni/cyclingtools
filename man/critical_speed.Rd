@@ -58,28 +58,28 @@ of time-to-exhaustion trials performed, and the chosen critical power model. Ple
 The 3-parameter hyperbolic model is calculated as the following (Morton, 1996):
 
 \loadmathjax
-\mjdeqn{t=\frac{W'}{speed-CS}+\frac{W'}{CS-S_{max}}}{t=W'/(speed-CS) + W'/(CS-Smax)}
+\mjdeqn{t=\frac{W'}{speed-CS}+\frac{D'}{CS-S_{max}}}{t=D'/(speed-CS) + D'/(CS-Smax)}
 }
 
 \subsection{CP 2-hyp}{
 
 The 2-parameter hyperbolic model is calculated as the following (Hill, 1993):
 
-\mjdeqn{t=\frac{W'}{speed-CS}}{t=W'/(speed-CS)}
+\mjdeqn{t=\frac{D'}{speed-CS}}{t=D'/(speed-CS)}
 }
 
 \subsection{CP linear}{
 
 The linear model is calculated as the following (Moritani et al. 1981):
 
-\mjdeqn{W_{lim}=W'+CP\cdot t}{Wlim=W'+CS*t}
+\mjdeqn{D_{lim}=D'+CP\cdot t}{Dlim=D'+CS*t}
 }
 
 \subsection{CP 1/time}{
 
 The 1/time linear model is calculated as the following (Whipp et al. 1982):
 
-\mjdeqn{speed=W'\cdot \frac{1}{t}+CS}{speed=W'*(1/t)+CS}
+\mjdeqn{speed=D'\cdot \frac{1}{t}+CS}{speed=D'*(1/t)+CS}
 }
 
 \subsection{All combinations}{
