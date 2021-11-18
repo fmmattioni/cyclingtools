@@ -7,8 +7,6 @@
 #' @param power_output_column The name of the power output column. This value has to be in watts.
 #' @param time_to_exhaustion_column The name of the time-to-exhaustion column. This value has to be in seconds. Default to `"TTE"`.
 #' @param method The method for estimating critical power. It can be one or multiple methods. Default to `c("3-hyp", "2-hyp", "linear", "1/time")`.
-#' @param plot A boolean indicating whether to produce a plot from the critical power estimation. Default to `TRUE`.
-#' @param reverse_y_axis A boolean to indicate whether to plot the Power Output (W) in the y-axis. It is ignored for the linear methods. Default to `FALSE`.
 #' @param all_combinations A boolean indicating whether to perform the critical power estimation from all the possible combinations of time-to-exhaustion trials provided. Please, see 'Details' for more information. Default to `FALSE`.
 #'
 #' @details
@@ -88,7 +86,6 @@
 #'  power_output_column = "PO",
 #'  time_to_exhaustion_column = "TTE",
 #'  method = c("3-hyp", "2-hyp", "linear", "1/time"),
-#'  plot = TRUE,
 #'  all_combinations = FALSE
 #' )
 #'
@@ -98,8 +95,6 @@ critical_power <- function(
   power_output_column = "PO",
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
-  plot = TRUE,
-  reverse_y_axis = FALSE,
   all_combinations = FALSE
 ) {
 
@@ -165,9 +160,7 @@ critical_power <- function(
       power_output_column = power_output_column,
       time_to_exhaustion_column = time_to_exhaustion_column,
       method = method,
-      mode = "power",
-      plot = {{ plot }},
-      reverse_y_axis = {{ reverse_y_axis }}
+      mode = "power"
     ) %>% list()) %>%
     dplyr::ungroup() %>%
     dplyr::filter(purrr::map_lgl(results, ~!rlang::is_lgl_na(.x))) %>%
@@ -188,13 +181,6 @@ critical_power <- function(
       dplyr::mutate(method = factor(x = method, levels = c("3-hyp", "2-hyp", "linear", "1/time"))) %>%
       dplyr::arrange(method) %>%
       dplyr::mutate(method = as.character(method))
-  }
-
-  if(plot & all_combinations) {
-    out <- out %>%
-      dplyr::rowwise() %>%
-      dplyr::mutate(plot = add_index_plot(.plot = plot, method = method, index = index) %>% list()) %>%
-      dplyr::ungroup()
   }
 
   ## this excludes the Pmax and Pmax SEE columns in case 3-hyp was not chosen

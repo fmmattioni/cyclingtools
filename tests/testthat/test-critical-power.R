@@ -3,8 +3,7 @@ test_that("critical power functions work", {
     object = critical_power(
       .data = demo_critical_power,
       power_output_column = "PO",
-      time_to_exhaustion_column = "TTE",
-      plot = FALSE
+      time_to_exhaustion_column = "TTE"
     ),
     class = "tbl_df"
   )

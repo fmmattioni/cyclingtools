@@ -9,8 +9,6 @@ critical_power(
   power_output_column = "PO",
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
-  plot = TRUE,
-  reverse_y_axis = FALSE,
   all_combinations = FALSE
 )
 }
@@ -22,10 +20,6 @@ critical_power(
 \item{time_to_exhaustion_column}{The name of the time-to-exhaustion column. This value has to be in seconds. Default to \code{"TTE"}.}
 
 \item{method}{The method for estimating critical power. It can be one or multiple methods. Default to \code{c("3-hyp", "2-hyp", "linear", "1/time")}.}
-
-\item{plot}{A boolean indicating whether to produce a plot from the critical power estimation. Default to \code{TRUE}.}
-
-\item{reverse_y_axis}{A boolean to indicate whether to plot the Power Output (W) in the y-axis. It is ignored for the linear methods. Default to \code{FALSE}.}
 
 \item{all_combinations}{A boolean indicating whether to perform the critical power estimation from all the possible combinations of time-to-exhaustion trials provided. Please, see 'Details' for more information. Default to \code{FALSE}.}
 }
@@ -100,7 +94,6 @@ results <- critical_power(
  power_output_column = "PO",
  time_to_exhaustion_column = "TTE",
  method = c("3-hyp", "2-hyp", "linear", "1/time"),
- plot = TRUE,
  all_combinations = FALSE
 )
 

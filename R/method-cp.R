@@ -13,8 +13,6 @@
 #' @param time_to_exhaustion_column The name of the time-to-exhaustion column. This value has to be in seconds. Default to `"TTE"`.
 #' @param method The method for estimating critical speed. It can be one or multiple methods. Default to `c("3-hyp", "2-hyp", "linear", "1/time")`.
 #' @param mode Specify 'power' for critical power, and 'speed' for critical speed.
-#' @param plot A boolean indicating whether to produce a plot from the critical power/speed estimation. Default to `TRUE`.
-#' @param reverse_y_axis A boolean to indicate whether to plot the Power Output (W) or Speed (m/s) in the y-axis. It is ignored for the linear methods. Default to `FALSE`.
 #'
 #' @return a [tibble][tibble::tibble-package] containing the following columns:
 #' \item{method}{The critical power method for that estimation.}
@@ -38,9 +36,7 @@ method_cp <- function(
   distance_column,
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
-  mode = c("power", "speed"),
-  plot = TRUE,
-  reverse_y_axis = FALSE
+  mode = c("power", "speed")
 ) {
 
   if(missing(.data))
@@ -60,9 +56,7 @@ method_cp.power <- function(
   distance_column,
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
-  mode = c("power", "speed"),
-  plot = TRUE,
-  reverse_y_axis = FALSE
+  mode = c("power", "speed")
 ) {
 
   if(method == "3-hyp") {
@@ -139,24 +133,6 @@ method_cp.power <- function(
     method = {{ method }}
   )
 
-  if(plot) {
-
-    cp_plot <- plot_cp(
-      .data = .data,
-      power_output_column = {{ power_output_column }},
-      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
-      method = {{ method }},
-      model = model
-    )
-
-    if(reverse_y_axis)
-      cp_plot <- cp_plot +
-        ggplot2::coord_flip()
-
-    results_summary <- results_summary %>%
-      dplyr::mutate(plot = list(cp_plot))
-  }
-
   out <- .data %>%
     tidyr::nest(data = dplyr::everything()) %>%
     dplyr::bind_cols(results_summary)
@@ -171,9 +147,7 @@ method_cp.speed <- function(
   distance_column,
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
-  mode = c("power", "speed"),
-  plot = TRUE,
-  reverse_y_axis = FALSE
+  mode = c("power", "speed")
 ) {
 
   # mutate the speed column
@@ -254,24 +228,6 @@ method_cp.speed <- function(
     method = {{ method }},
     critical_speed = TRUE
   )
-
-  if(plot) {
-
-    cs_plot <- plot_cp(
-      .data = .data,
-      power_output_column = "speed",
-      time_to_exhaustion_column = {{ time_to_exhaustion_column }},
-      method = {{ method }},
-      model = model
-    )
-
-    if(reverse_y_axis)
-      cs_plot <- cs_plot +
-        ggplot2::coord_flip()
-
-    results_summary <- results_summary %>%
-      dplyr::mutate(plot = list(cs_plot))
-  }
 
   out <- .data %>%
     tidyr::nest(data = dplyr::everything()) %>%

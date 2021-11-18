@@ -10,9 +10,7 @@ method_cp(
   distance_column,
   time_to_exhaustion_column = "TTE",
   method = c("3-hyp", "2-hyp", "linear", "1/time"),
-  mode = c("power", "speed"),
-  plot = TRUE,
-  reverse_y_axis = FALSE
+  mode = c("power", "speed")
 )
 }
 \arguments{
@@ -27,10 +25,6 @@ method_cp(
 \item{method}{The method for estimating critical speed. It can be one or multiple methods. Default to \code{c("3-hyp", "2-hyp", "linear", "1/time")}.}
 
 \item{mode}{Specify 'power' for critical power, and 'speed' for critical speed.}
-
-\item{plot}{A boolean indicating whether to produce a plot from the critical power/speed estimation. Default to \code{TRUE}.}
-
-\item{reverse_y_axis}{A boolean to indicate whether to plot the Power Output (W) or Speed (m/s) in the y-axis. It is ignored for the linear methods. Default to \code{FALSE}.}
 }
 \value{
 a \link[tibble:tibble-package]{tibble} containing the following columns:

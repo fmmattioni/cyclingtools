@@ -108,18 +108,3 @@ get_indexes <- function(
 
   out
 }
-
-#' Add index to plot
-#'
-#' Internal use only.
-#'
-#' @param .plot The `ggplot2` object derived from results.
-#' @param method The critical power method used.
-#' @param index The index of the combination
-#'
-#' @return A `ggplot2` object
-#' @keywords internal
-add_index_plot <- function(.plot, method, index) {
-  .plot +
-    ggplot2::labs(title = bquote(CP[.(method)] ~ ' - ' ~ .(index)))
-}
