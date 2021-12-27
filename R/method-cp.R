@@ -81,6 +81,16 @@ method_cp.power <- function(
       lower = c(AWC = 0, CP = 0, Pmax = 0)
     )
 
+    min_power_output <- min(.data[[{{ power_output_column }}]])
+    max_power_output <- max(.data[[{{ power_output_column }}]])
+
+    new_data <- dplyr::tibble(
+      !!{{ power_output_column }} := seq(min_power_output, max_power_output, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("power", "time")
+
   } else if(method == "2-hyp") {
 
     if(nrow(.data) < 3)
@@ -102,6 +112,16 @@ method_cp.power <- function(
       lower = c(AWC = 0, CP = 0)
     )
 
+    min_power_output <- min(.data[[{{ power_output_column }}]])
+    max_power_output <- max(.data[[{{ power_output_column }}]])
+
+    new_data <- dplyr::tibble(
+      !!{{ power_output_column }} := seq(min_power_output, max_power_output, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("power", "time")
+
   } else if (method == "linear") {
 
     # Formula
@@ -112,6 +132,16 @@ method_cp.power <- function(
       formula = cp_formula,
       data = .data
     )
+
+    min_time_to_exhaustion <- min(.data[[{{ time_to_exhaustion_column }}]])
+    max_time_to_exhaustion <- max(.data[[{{ time_to_exhaustion_column }}]])
+
+    new_data <- dplyr::tibble(
+      !!{{ time_to_exhaustion_column }} := seq(min_time_to_exhaustion, max_time_to_exhaustion, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("time", "awc")
 
   } else if (method == "1/time") {
 
@@ -124,6 +154,17 @@ method_cp.power <- function(
       data = .data
     )
 
+    min_time_to_exhaustion <- min(.data[[{{ time_to_exhaustion_column }}]])
+    max_time_to_exhaustion <- max(.data[[{{ time_to_exhaustion_column }}]])
+
+    new_data <- dplyr::tibble(
+      !!{{ time_to_exhaustion_column }} := seq(min_time_to_exhaustion, max_time_to_exhaustion, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("1/time", "power")
+    data_plot <- data_plot %>%
+      dplyr::mutate(`1/time` = 1 / `1/time`)
   }
 
   results_summary <- summary_cp(
@@ -135,7 +176,7 @@ method_cp.power <- function(
 
   out <- .data %>%
     tidyr::nest(data = dplyr::everything()) %>%
-    dplyr::bind_cols(results_summary)
+    dplyr::bind_cols(results_summary, tidyr::nest(data_plot, data_plot = dplyr::everything()))
 
   out
 }
@@ -176,6 +217,15 @@ method_cp.speed <- function(
       lower = c(AWC = 0, CS = 0, Smax = 0)
     )
 
+    min_speed <- min(.data[["speed"]])
+    max_speed <- max(.data[["speed"]])
+
+    new_data <- dplyr::tibble(
+      "speed" = seq(min_speed, max_speed, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("speed", "time")
   } else if(method == "2-hyp") {
 
     if(nrow(.data) < 3)
@@ -196,7 +246,15 @@ method_cp.speed <- function(
       control = list(maxiter = 1000),
       lower = c(AWC = 0, CS = 0)
     )
+    min_speed <- min(.data[["speed"]])
+    max_speed <- max(.data[["speed"]])
 
+    new_data <- dplyr::tibble(
+      "speed" = seq(min_speed, max_speed, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("speed", "time")
   } else if (method == "linear") {
 
     # Formula
@@ -207,7 +265,15 @@ method_cp.speed <- function(
       formula = cs_formula,
       data = .data
     )
+    min_time_to_exhaustion <- min(.data[[{{ time_to_exhaustion_column }}]])
+    max_time_to_exhaustion <- max(.data[[{{ time_to_exhaustion_column }}]])
 
+    new_data <- dplyr::tibble(
+      !!{{ time_to_exhaustion_column }} := seq(min_time_to_exhaustion, max_time_to_exhaustion, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("time", "awc")
   } else if (method == "1/time") {
 
     # Formula
@@ -218,7 +284,17 @@ method_cp.speed <- function(
       formula = cs_formula,
       data = .data
     )
+    min_time_to_exhaustion <- min(.data[[{{ time_to_exhaustion_column }}]])
+    max_time_to_exhaustion <- max(.data[[{{ time_to_exhaustion_column }}]])
 
+    new_data <- dplyr::tibble(
+      !!{{ time_to_exhaustion_column }} := seq(min_time_to_exhaustion, max_time_to_exhaustion, length.out = 200)
+    )
+
+    data_plot <- broom::augment(model, newdata = new_data)
+    names(data_plot) <- c("1/time", "speed")
+    data_plot <- data_plot %>%
+      dplyr::mutate(`1/time` = 1 / `1/time`)
   }
 
   results_summary <- summary_cp(
@@ -231,7 +307,7 @@ method_cp.speed <- function(
 
   out <- .data %>%
     tidyr::nest(data = dplyr::everything()) %>%
-    dplyr::bind_cols(results_summary)
+    dplyr::bind_cols(results_summary, tidyr::nest(data_plot, data_plot = dplyr::everything()))
 
   out
 }
