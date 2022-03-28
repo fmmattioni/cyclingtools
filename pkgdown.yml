@@ -1,7 +1,7 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1.9000
-pkgdown_sha: e1e46f2e13c7efdb17bc4eae40bc3779c2b0b517
+pkgdown: 2.0.2.9000
+pkgdown_sha: 98d5a5c735eb244cb98b2e6bab1d54bb27c0af95
 articles:
   cyclingtools: cyclingtools.html
-last_built: 2020-09-23T20:57Z
+last_built: 2022-03-28T07:05Z
 

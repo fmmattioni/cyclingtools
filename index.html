@@ -37,6 +37,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -67,13 +69,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/fmmattioni/cyclingtools">
+  <a href="https://github.com/fmmattioni/cyclingtools" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/felipe_mattioni">
+  <a href="https://twitter.com/felipe_mattioni" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -90,60 +92,57 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="cyclingtools-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#cyclingtools-" class="anchor"></a>cyclingtools <img src="reference/figures/logo.png" align="right" height="240">
+<div class="section level1">
+<div class="page-header"><h1 id="cyclingtools-">cyclingtools <img src="reference/figures/logo.png" align="right" height="240"><a class="anchor" aria-label="anchor" href="#cyclingtools-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p>The goal of <code>cyclingtools</code> is to provide tools for making easier to analyze data in cycling.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version of <code>cyclingtools</code> from <a href="https://github.com/fmmattioni/cyclingtools">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># install.packages("remotes")</span>
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"fmmattioni/cyclingtools"</span>)
-</pre></div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of <code>cyclingtools</code> from <a href="https://github.com/fmmattioni/cyclingtools" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"fmmattioni/cyclingtools"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<div id="critical-power" class="section level3">
-<h3 class="hasAnchor">
-<a href="#critical-power" class="anchor"></a>Critical Power</h3>
-<div id="demo-data" class="section level4">
-<h4 class="hasAnchor">
-<a href="#demo-data" class="anchor"></a>Demo data</h4>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="section level3">
+<h3 id="critical-power">Critical Power<a class="anchor" aria-label="anchor" href="#critical-power"></a>
+</h3>
+<div class="section level4">
+<h4 id="demo-data">Demo data<a class="anchor" aria-label="anchor" href="#demo-data"></a>
+</h4>
 <p>The package comes with a demonstration data frame to show how the functions work and also to show you how you can setup your data:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">cyclingtools</span>)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cyclingtools</span><span class="op">)</span>
 
-<span class="kw">demo_critical_power</span>
+<span class="va">demo_critical_power</span>
 <span class="co">#&gt;    PO  TTE</span>
 <span class="co">#&gt; 1 446  100</span>
 <span class="co">#&gt; 2 385  172</span>
 <span class="co">#&gt; 3 324  434</span>
 <span class="co">#&gt; 4 290  857</span>
-<span class="co">#&gt; 5 280 1361</span>
-</pre></div>
+<span class="co">#&gt; 5 280 1361</span></code></pre></div>
 </div>
-<div id="simple-analysis" class="section level4">
-<h4 class="hasAnchor">
-<a href="#simple-analysis" class="anchor"></a>Simple analysis</h4>
+<div class="section level4">
+<h4 id="simple-analysis">Simple analysis<a class="anchor" aria-label="anchor" href="#simple-analysis"></a>
+</h4>
 <p>Perform a simple analysis from the chosen critical power models:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_critical_power</span>, 
-  power_output_column = <span class="st">"PO"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
-  plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">FALSE</span>,
-  reverse_y_axis = <span class="fl">FALSE</span>
-)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_power.html">critical_power</a></span><span class="op">(</span>
+  .data <span class="op">=</span> <span class="va">demo_critical_power</span>, 
+  power_output_column <span class="op">=</span> <span class="st">"PO"</span>, 
+  time_to_exhaustion_column <span class="op">=</span> <span class="st">"TTE"</span>, 
+  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span><span class="op">)</span>, 
+  plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+  all_combinations <span class="op">=</span> <span class="cn">FALSE</span>,
+  reverse_y_axis <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
-<span class="kw">simple_results</span>
+<span class="va">simple_results</span>
 <span class="co">#&gt; # A tibble: 4 x 12</span>
 <span class="co">#&gt;   method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2</span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;</span>
@@ -151,33 +150,31 @@
 <span class="co">#&gt; 2 2-hyp  &lt;tib… &lt;nls&gt;  262.      1.6 24174.    1889.   NA         NA  0.997</span>
 <span class="co">#&gt; 3 linear &lt;tib… &lt;lm&gt;   266.      3   20961.    2248.   NA         NA  1.00 </span>
 <span class="co">#&gt; 4 1/time &lt;tib… &lt;lm&gt;   274.      6.2 17784.    1160    NA         NA  0.987</span>
-<span class="co">#&gt; # … with 2 more variables: RMSE &lt;dbl&gt;, plot &lt;list&gt;</span>
-</pre></div>
+<span class="co">#&gt; # … with 2 more variables: RMSE &lt;dbl&gt;, plot &lt;list&gt;</span></code></pre></div>
 <p>You can also plot the results:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">simple_results</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">method</span> <span class="op">==</span> <span class="st">"3-hyp"</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="kw">plot</span>)
-<span class="co">#&gt; [[1]]</span>
-</pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simple_results</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">method</span> <span class="op">==</span> <span class="st">"3-hyp"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span>
+<span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 </div>
-<div id="all-possible-combinations-analysis" class="section level4">
-<h4 class="hasAnchor">
-<a href="#all-possible-combinations-analysis" class="anchor"></a>All possible combinations analysis</h4>
+<div class="section level4">
+<h4 id="all-possible-combinations-analysis">All possible combinations analysis<a class="anchor" aria-label="anchor" href="#all-possible-combinations-analysis"></a>
+</h4>
 <p>You can also perform an analysis with all the possible combinations of time-to-exhaustion trials provided. All you need to do is to set <code>all_combinations = TRUE</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">combinations_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_critical_power</span>, 
-  power_output_column = <span class="st">"PO"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
-  plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">TRUE</span>,
-  reverse_y_axis = <span class="fl">FALSE</span>
-)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">combinations_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_power.html">critical_power</a></span><span class="op">(</span>
+  .data <span class="op">=</span> <span class="va">demo_critical_power</span>, 
+  power_output_column <span class="op">=</span> <span class="st">"PO"</span>, 
+  time_to_exhaustion_column <span class="op">=</span> <span class="st">"TTE"</span>, 
+  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span><span class="op">)</span>, 
+  plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+  all_combinations <span class="op">=</span> <span class="cn">TRUE</span>,
+  reverse_y_axis <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
-<span class="kw">combinations_results</span>
+<span class="va">combinations_results</span>
 <span class="co">#&gt; # A tibble: 74 x 13</span>
 <span class="co">#&gt;    index method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`</span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
@@ -191,83 +188,79 @@
 <span class="co">#&gt;  8 [1,2… 1/time &lt;tib… &lt;lm&gt;   278.      7.9 17194.    1339.   NA        NA  </span>
 <span class="co">#&gt;  9 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  255       1.9 36462.    3328.  627.       63.7</span>
 <span class="co">#&gt; 10 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  262.      2.2 24940.    2882.   NA        NA  </span>
-<span class="co">#&gt; # … with 64 more rows, and 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, plot &lt;list&gt;</span>
-</pre></div>
+<span class="co">#&gt; # … with 64 more rows, and 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, plot &lt;list&gt;</span></code></pre></div>
 <p>You can also plot the results:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">combinations_results</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="fl">1</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="kw">plot</span>)
-<span class="co">#&gt; [[1]]</span>
-</pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">combinations_results</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span>
+<span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 </div>
 </div>
-<div id="critical-speed" class="section level3">
-<h3 class="hasAnchor">
-<a href="#critical-speed" class="anchor"></a>Critical Speed</h3>
-<div id="demo-data-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#demo-data-1" class="anchor"></a>Demo data</h4>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">demo_critical_speed</span>
+<div class="section level3">
+<h3 id="critical-speed">Critical Speed<a class="anchor" aria-label="anchor" href="#critical-speed"></a>
+</h3>
+<div class="section level4">
+<h4 id="demo-data-1">Demo data<a class="anchor" aria-label="anchor" href="#demo-data-1"></a>
+</h4>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">demo_critical_speed</span>
 <span class="co">#&gt; # A tibble: 3 x 2</span>
 <span class="co">#&gt;   Distance   TTE</span>
 <span class="co">#&gt;      &lt;int&gt; &lt;int&gt;</span>
 <span class="co">#&gt; 1      956   180</span>
 <span class="co">#&gt; 2     1500   300</span>
-<span class="co">#&gt; 3     3399   720</span>
-</pre></div>
+<span class="co">#&gt; 3     3399   720</span></code></pre></div>
 </div>
-<div id="simple-analysis-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#simple-analysis-1" class="anchor"></a>Simple analysis</h4>
+<div class="section level4">
+<h4 id="simple-analysis-1">Simple analysis<a class="anchor" aria-label="anchor" href="#simple-analysis-1"></a>
+</h4>
 <p>Perform a simple analysis from the chosen critical power models:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="kw">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_speed.html">critical_speed</a></span>(
-  .data = <span class="kw">demo_critical_speed</span>, 
-  distance_column = <span class="st">"Distance"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
-  plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">FALSE</span>,
-  reverse_y_axis = <span class="fl">FALSE</span>
-)
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/critical_speed.html">critical_speed</a></span><span class="op">(</span>
+  .data <span class="op">=</span> <span class="va">demo_critical_speed</span>, 
+  distance_column <span class="op">=</span> <span class="st">"Distance"</span>, 
+  time_to_exhaustion_column <span class="op">=</span> <span class="st">"TTE"</span>, 
+  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span><span class="op">)</span>, 
+  plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+  all_combinations <span class="op">=</span> <span class="cn">FALSE</span>,
+  reverse_y_axis <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
-<span class="kw">simple_results</span>
+<span class="va">simple_results</span>
 <span class="co">#&gt; # A tibble: 3 x 10</span>
 <span class="co">#&gt;   method data             model     CS `CS SEE`  `D'` `D' SEE`    R2  RMSE plot </span>
 <span class="co">#&gt;   &lt;chr&gt;  &lt;list&gt;           &lt;list&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;lis&gt;</span>
 <span class="co">#&gt; 1 2-hyp  &lt;tibble [3 × 3]&gt; &lt;nls&gt;   4.52        0  143.     0.94  1.00  1.43 &lt;gg&gt; </span>
 <span class="co">#&gt; 2 linear &lt;tibble [3 × 3]&gt; &lt;lm&gt;    4.52        0  142.     1     1     0.86 &lt;gg&gt; </span>
-<span class="co">#&gt; 3 1/time &lt;tibble [3 × 3]&gt; &lt;lm&gt;    4.53        0  142.     1.02  1.00  0    &lt;gg&gt;</span>
-</pre></div>
+<span class="co">#&gt; 3 1/time &lt;tibble [3 × 3]&gt; &lt;lm&gt;    4.53        0  142.     1.02  1.00  0    &lt;gg&gt;</span></code></pre></div>
 </div>
 </div>
-<div id="you-can-also-do-all-of-these-analyses-in-our-shiny-app" class="section level3">
-<h3 class="hasAnchor">
-<a href="#you-can-also-do-all-of-these-analyses-in-our-shiny-app" class="anchor"></a>You can also do all of these analyses in our shiny app:</h3>
-<p><a href="https://www.shiny.fmattioni.me/CPapp/">Critical Power Dashboard</a></p>
+<div class="section level3">
+<h3 id="you-can-also-do-all-of-these-analyses-in-our-shiny-app">You can also do all of these analyses in our shiny app:<a class="anchor" aria-label="anchor" href="#you-can-also-do-all-of-these-analyses-in-our-shiny-app"></a>
+</h3>
+<p><a href="https://www.shiny.fmattioni.me/CPapp/" class="external-link">Critical Power Dashboard</a></p>
 </div>
 </div>
-<div id="coming-soon" class="section level2">
-<h2 class="hasAnchor">
-<a href="#coming-soon" class="anchor"></a>Coming soon</h2>
+<div class="section level2">
+<h2 id="coming-soon">Coming soon<a class="anchor" aria-label="anchor" href="#coming-soon"></a>
+</h2>
 <ul>
 <li><p>Training impulse analyses (iTRIMP, bTRIMP, eTRIMP, luTRIMP)</p></li>
 <li><p>Suggestions? Feel free to open an issue!</p></li>
 </ul>
 </div>
-<div id="related-work" class="section level2">
-<h2 class="hasAnchor">
-<a href="#related-work" class="anchor"></a>Related work</h2>
-<p><a href="https://cran.r-project.org/web/packages/cycleRtools/index.html">cycleRtools</a>: A suite of functions for analysing cycling data.</p>
+<div class="section level2">
+<h2 id="related-work">Related work<a class="anchor" aria-label="anchor" href="#related-work"></a>
+</h2>
+<p><a href="https://cran.r-project.org/web/packages/cycleRtools/index.html" class="external-link">cycleRtools</a>: A suite of functions for analysing cycling data.</p>
 </div>
-<div id="citation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h2>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="st">"cyclingtools"</span>)
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"cyclingtools"</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Maturana M, Felipe, Fontana, Y F, Pogliaghi, Silvia, Passfield, Louis,</span>
 <span class="co">#&gt; Murias, M J (2018). "Critical power: How different protocols and models</span>
@@ -287,52 +280,57 @@
 <span class="co">#&gt;     year = {2018},</span>
 <span class="co">#&gt;     publisher = {Elsevier},</span>
 <span class="co">#&gt;     doi = {10.1016/j.jsams.2017.11.015},</span>
-<span class="co">#&gt;   }</span>
-</pre></div>
+<span class="co">#&gt;   }</span></code></pre></div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="citation">
-<h2>Citation</h2>
-<ul class="list-unstyled">
-<li><a href="authors.html">Citing cyclingtools</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://fmattioni.me">Felipe Mattioni Maturana</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4221-6104" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://CRAN.R-project.org/package=cyclingtools"><img src="https://www.r-pkg.org/badges/version/cyclingtools" alt="CRAN status"></a></li>
-<li><a href="https://github.com/fmmattioni/cyclingtools/actions"><img src="https://github.com/fmmattioni/cyclingtools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="authors.html#citation">Citing cyclingtools</a></li>
 </ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>
+<a href="https://fmattioni.me" class="external-link">Felipe Mattioni Maturana</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4221-6104" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://CRAN.R-project.org/package=cyclingtools" class="external-link"><img src="https://www.r-pkg.org/badges/version/cyclingtools" alt="CRAN status"></a></li>
+<li><a href="https://github.com/fmmattioni/cyclingtools/actions" class="external-link"><img src="https://github.com/fmmattioni/cyclingtools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://fmattioni.me">Felipe Mattioni Maturana</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://fmattioni.me" class="external-link">Felipe Mattioni Maturana</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer>
@@ -340,6 +338,8 @@
 
   
 
+
+  
 
   </body>
 </html>

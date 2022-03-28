@@ -37,6 +37,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -67,13 +69,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/fmmattioni/cyclingtools">
+  <a href="https://github.com/fmmattioni/cyclingtools" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://twitter.com/felipe_mattioni">
+  <a href="https://twitter.com/felipe_mattioni" class="external-link">
     <span class="fa fa-twitter fa-lg"></span>
      
   </a>
@@ -109,59 +111,57 @@ Please, note that currently <code>cyclingtools</code> only provide <strong>criti
 If you have a suggestion, feel free to open an issue.
 </p>
 </div>
-<div id="critical-power-analysis" class="section level2">
-<h2 class="hasAnchor">
-<a href="#critical-power-analysis" class="anchor"></a>Critical Power analysis</h2>
+<div class="section level2">
+<h2 id="critical-power-analysis">Critical Power analysis<a class="anchor" aria-label="anchor" href="#critical-power-analysis"></a>
+</h2>
 <p>For performing <strong>critical power</strong> analysis, the general <code><a href="../reference/critical_power.html">critical_power()</a></code> function was created. There are basically two main options in there: you can choose which model to fit (i.e., CP 3-hyp, CP 2-hyp, CP linear, and CP 1/time), and you can also choose whether to produce an analysis with all the combinations of the time-to-exhaustion trials provided.</p>
 <p>Let’s look at the main functionality:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">cyclingtools</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">cyclingtools</span><span class="op">)</span>
 
-<span class="kw">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_critical_power</span>, 
-  power_output_column = <span class="st">"PO"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
-  plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">FALSE</span>,
-  reverse_y_axis = <span class="fl">FALSE</span>
-)
+<span class="va">simple_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span><span class="op">(</span>
+  .data <span class="op">=</span> <span class="va">demo_critical_power</span>, 
+  power_output_column <span class="op">=</span> <span class="st">"PO"</span>, 
+  time_to_exhaustion_column <span class="op">=</span> <span class="st">"TTE"</span>, 
+  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span><span class="op">)</span>, 
+  plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+  all_combinations <span class="op">=</span> <span class="cn">FALSE</span>,
+  reverse_y_axis <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
-<span class="kw">simple_results</span>
-<span class="co">#&gt; # A tibble: 4 x 12</span>
-<span class="co">#&gt;   method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2</span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 3-hyp  &lt;tib… &lt;nls&gt;  260.      3.1 27410.    4794  1004.       835. 0.998</span>
-<span class="co">#&gt; 2 2-hyp  &lt;tib… &lt;nls&gt;  262.      1.6 24174.    1889.   NA         NA  0.997</span>
-<span class="co">#&gt; 3 linear &lt;tib… &lt;lm&gt;   266.      3   20961.    2248.   NA         NA  1.00 </span>
-<span class="co">#&gt; 4 1/time &lt;tib… &lt;lm&gt;   274.      6.2 17784.    1160    NA         NA  0.987</span>
-<span class="co">#&gt; # … with 2 more variables: RMSE &lt;dbl&gt;, plot &lt;list&gt;</span>
-</pre></div>
+<span class="va">simple_results</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 12</span></span>
+<span class="co">#&gt;   method data     model     CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 3-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>   260.      3.1 <span style="text-decoration: underline;">27</span>410.    <span style="text-decoration: underline;">4</span>794  <span style="text-decoration: underline;">1</span>004.       835. 0.998</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>   262.      1.6 <span style="text-decoration: underline;">24</span>174.    <span style="text-decoration: underline;">1</span>889.   <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>  0.997</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> linear &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>    266.      3   <span style="text-decoration: underline;">20</span>961.    <span style="text-decoration: underline;">2</span>248.   <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>  1.00 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1/time &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>    274.      6.2 <span style="text-decoration: underline;">17</span>784.    <span style="text-decoration: underline;">1</span>160    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>  0.987</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: RMSE &lt;dbl&gt;, plot &lt;list&gt;</span></span></code></pre></div>
 <p>In the above example, we chose to fit critical power on all the available methods, but you can also just choose one or two:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="../reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_critical_power</span>, 
-  power_output_column = <span class="st">"PO"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>), 
-  plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">FALSE</span>,
-  reverse_y_axis = <span class="fl">FALSE</span>
-)
-<span class="co">#&gt; # A tibble: 2 x 12</span>
-<span class="co">#&gt;   method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2  RMSE</span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 3-hyp  &lt;tib… &lt;nls&gt;  260.      3.1 27410.    4794  1004.       835. 0.998  37.1</span>
-<span class="co">#&gt; 2 2-hyp  &lt;tib… &lt;nls&gt;  262.      1.6 24174.    1889.   NA         NA  0.997  34.7</span>
-<span class="co">#&gt; # … with 1 more variable: plot &lt;list&gt;</span>
-</pre></div>
-<p>The nice thing about the retrieved results is that the <strong>model</strong> is saved as well. So you can further explore it if you would like to. For example, using the base R function <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">simple_results</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="fl">1</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="kw">model</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">.</span>[[<span class="fl">1</span>]] <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span>()
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/critical_power.html">critical_power</a></span><span class="op">(</span>
+  .data <span class="op">=</span> <span class="va">demo_critical_power</span>, 
+  power_output_column <span class="op">=</span> <span class="st">"PO"</span>, 
+  time_to_exhaustion_column <span class="op">=</span> <span class="st">"TTE"</span>, 
+  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span><span class="op">)</span>, 
+  plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+  all_combinations <span class="op">=</span> <span class="cn">FALSE</span>,
+  reverse_y_axis <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 12</span></span>
+<span class="co">#&gt;   method data     model     CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`    R2</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 3-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>   260.      3.1 <span style="text-decoration: underline;">27</span>410.    <span style="text-decoration: underline;">4</span>794  <span style="text-decoration: underline;">1</span>004.       835. 0.998</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>   262.      1.6 <span style="text-decoration: underline;">24</span>174.    <span style="text-decoration: underline;">1</span>889.   <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>  0.997</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: RMSE &lt;dbl&gt;, plot &lt;list&gt;</span></span></code></pre></div>
+<p>The nice thing about the retrieved results is that the <strong>model</strong> is saved as well. So you can further explore it if you would like to. For example, using the base R function <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simple_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Formula: TTE ~ (AWC/(PO - CP)) + (AWC/(CP - Pmax))</span>
 <span class="co">#&gt; </span>
@@ -176,87 +176,82 @@ If you have a suggestion, feel free to open an issue.
 <span class="co">#&gt; Residual standard error: 37.14 on 2 degrees of freedom</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of iterations to convergence: 5 </span>
-<span class="co">#&gt; Achieved convergence tolerance: 1.49e-08</span>
-</pre></div>
-<p>Or the <code><a href="https://rdrr.io/pkg/generics/man/tidy.html">broom::tidy()</a></code> function:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw">simple_results</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="fl">1</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="kw">model</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">.</span>[[<span class="fl">1</span>]] <span class="op">%&gt;%</span> 
-  <span class="kw">broom</span>::<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>()
-<span class="co">#&gt; # A tibble: 3 x 5</span>
+<span class="co">#&gt; Achieved convergence tolerance: 1.49e-08</span></code></pre></div>
+<p>Or the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">broom::tidy()</a></code> function:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simple_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="va">.</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 5</span></span>
 <span class="co">#&gt;   term  estimate std.error statistic  p.value</span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 AWC     27410.   4794.        5.72 0.0293  </span>
-<span class="co">#&gt; 2 CP        260.      3.10     84.0  0.000142</span>
-<span class="co">#&gt; 3 Pmax     1004.    835.        1.20 0.352</span>
-</pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> AWC     <span style="text-decoration: underline;">27</span>410.   <span style="text-decoration: underline;">4</span>794.        5.72 0.029<span style="text-decoration: underline;">3</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> CP        260.      3.10     84.0  0.000<span style="text-decoration: underline;">142</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Pmax     <span style="text-decoration: underline;">1</span>004.    835.        1.20 0.352</span></code></pre></div>
 <p>The above can also be more quickly achieved with the following:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw">simple_results</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">method</span>, <span class="kw">model</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html">rowwise</a></span>() <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(tidy_model = <span class="kw">broom</span>::<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="kw">model</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>()) <span class="op">%&gt;%</span> 
-  <span class="kw">tidyr</span>::<span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html">unnest</a></span>(cols = <span class="kw">tidy_model</span>)
-<span class="co">#&gt; # A tibble: 9 x 7</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">simple_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">method</span>, <span class="va">model</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tidy_model <span class="op">=</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="va">tidy_model</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 7</span></span>
 <span class="co">#&gt;   method model  term        estimate std.error statistic     p.value</span>
-<span class="co">#&gt;   &lt;chr&gt;  &lt;list&gt; &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 3-hyp  &lt;nls&gt;  AWC           27410.   4794.        5.72 0.0293     </span>
-<span class="co">#&gt; 2 3-hyp  &lt;nls&gt;  CP              260.      3.10     84.0  0.000142   </span>
-<span class="co">#&gt; 3 3-hyp  &lt;nls&gt;  Pmax           1004.    835.        1.20 0.352      </span>
-<span class="co">#&gt; 4 2-hyp  &lt;nls&gt;  AWC           24175.   1889.       12.8  0.00103    </span>
-<span class="co">#&gt; 5 2-hyp  &lt;nls&gt;  CP              262.      1.58    166.   0.000000485</span>
-<span class="co">#&gt; 6 linear &lt;lm&gt;   (Intercept)   20961.   2248.        9.32 0.00261    </span>
-<span class="co">#&gt; 7 linear &lt;lm&gt;   TTE             265.      3.00     88.6  0.00000317 </span>
-<span class="co">#&gt; 8 1/time &lt;lm&gt;   (Intercept)     274.      6.16     44.4  0.0000251  </span>
-<span class="co">#&gt; 9 1/time &lt;lm&gt;   I(1/TTE)      17784.   1160.       15.3  0.000603</span>
-</pre></div>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 3-hyp  <span style="color: #949494;">&lt;nls&gt;</span>  AWC           <span style="text-decoration: underline;">27</span>410.   <span style="text-decoration: underline;">4</span>794.        5.72 0.029<span style="text-decoration: underline;">3</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 3-hyp  <span style="color: #949494;">&lt;nls&gt;</span>  CP              260.      3.10     84.0  0.000<span style="text-decoration: underline;">142</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3-hyp  <span style="color: #949494;">&lt;nls&gt;</span>  Pmax           <span style="text-decoration: underline;">1</span>004.    835.        1.20 0.352      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2-hyp  <span style="color: #949494;">&lt;nls&gt;</span>  AWC           <span style="text-decoration: underline;">24</span>175.   <span style="text-decoration: underline;">1</span>889.       12.8  0.001<span style="text-decoration: underline;">03</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2-hyp  <span style="color: #949494;">&lt;nls&gt;</span>  CP              262.      1.58    166.   0.000<span style="text-decoration: underline;">000</span>485</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> linear <span style="color: #949494;">&lt;lm&gt;</span>   (Intercept)   <span style="text-decoration: underline;">20</span>961.   <span style="text-decoration: underline;">2</span>248.        9.32 0.002<span style="text-decoration: underline;">61</span>    </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> linear <span style="color: #949494;">&lt;lm&gt;</span>   TTE             265.      3.00     88.6  0.000<span style="text-decoration: underline;">003</span>17 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 1/time <span style="color: #949494;">&lt;lm&gt;</span>   (Intercept)     274.      6.16     44.4  0.000<span style="text-decoration: underline;">025</span>1  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1/time <span style="color: #949494;">&lt;lm&gt;</span>   I(1/TTE)      <span style="text-decoration: underline;">17</span>784.   <span style="text-decoration: underline;">1</span>160.       15.3  0.000<span style="text-decoration: underline;">603</span></span></code></pre></div>
 </div>
-<div id="multiple-combinations" class="section level2">
-<h2 class="hasAnchor">
-<a href="#multiple-combinations" class="anchor"></a>Multiple combinations</h2>
+<div class="section level2">
+<h2 id="multiple-combinations">Multiple combinations<a class="anchor" aria-label="anchor" href="#multiple-combinations"></a>
+</h2>
 <p>The <code>all_combinations</code> argument let you decide whether to perform multiple fits from all the possible combinations of trials provided:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw">combinations_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span>(
-  .data = <span class="kw">demo_critical_power</span>, 
-  power_output_column = <span class="st">"PO"</span>, 
-  time_to_exhaustion_column = <span class="st">"TTE"</span>, 
-  method = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span>), 
-  plot = <span class="fl">TRUE</span>, 
-  all_combinations = <span class="fl">TRUE</span>,
-  reverse_y_axis = <span class="fl">FALSE</span>
-)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">combinations_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/critical_power.html">critical_power</a></span><span class="op">(</span>
+  .data <span class="op">=</span> <span class="va">demo_critical_power</span>, 
+  power_output_column <span class="op">=</span> <span class="st">"PO"</span>, 
+  time_to_exhaustion_column <span class="op">=</span> <span class="st">"TTE"</span>, 
+  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"3-hyp"</span>, <span class="st">"2-hyp"</span>, <span class="st">"linear"</span>, <span class="st">"1/time"</span><span class="op">)</span>, 
+  plot <span class="op">=</span> <span class="cn">TRUE</span>, 
+  all_combinations <span class="op">=</span> <span class="cn">TRUE</span>,
+  reverse_y_axis <span class="op">=</span> <span class="cn">FALSE</span>
+<span class="op">)</span>
 
-<span class="kw">combinations_results</span>
-<span class="co">#&gt; # A tibble: 74 x 13</span>
-<span class="co">#&gt;    index method data  model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`</span>
-<span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;lis&gt; &lt;lis&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  260.      3.1 27410.    4794  1004.      835. </span>
-<span class="co">#&gt;  2 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  262.      1.6 24174.    1889.   NA        NA  </span>
-<span class="co">#&gt;  3 [1,2… linear &lt;tib… &lt;lm&gt;   266.      3   20961.    2248.   NA        NA  </span>
-<span class="co">#&gt;  4 [1,2… 1/time &lt;tib… &lt;lm&gt;   274.      6.2 17784.    1160    NA        NA  </span>
-<span class="co">#&gt;  5 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  246.      6.2 42699.    7655   595.       70.2</span>
-<span class="co">#&gt;  6 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  261.      4.7 24814.    3691.   NA        NA  </span>
-<span class="co">#&gt;  7 [1,2… linear &lt;tib… &lt;lm&gt;   269.      5.9 19977.    2877.   NA        NA  </span>
-<span class="co">#&gt;  8 [1,2… 1/time &lt;tib… &lt;lm&gt;   278.      7.9 17194.    1339.   NA        NA  </span>
-<span class="co">#&gt;  9 [1,2… 3-hyp  &lt;tib… &lt;nls&gt;  255       1.9 36462.    3328.  627.       63.7</span>
-<span class="co">#&gt; 10 [1,2… 2-hyp  &lt;tib… &lt;nls&gt;  262.      2.2 24940.    2882.   NA        NA  </span>
-<span class="co">#&gt; # … with 64 more rows, and 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, plot &lt;list&gt;</span>
-</pre></div>
+<span class="va">combinations_results</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 74 × 13</span></span>
+<span class="co">#&gt;    index   method data     model    CP `CP SEE`   `W'` `W' SEE`  Pmax `Pmax SEE`</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lis&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> [1,2,3… 3-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>  260.      3.1 <span style="text-decoration: underline;">27</span>410.    <span style="text-decoration: underline;">4</span>794  <span style="text-decoration: underline;">1</span>004.      835. </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> [1,2,3… 2-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>  262.      1.6 <span style="text-decoration: underline;">24</span>174.    <span style="text-decoration: underline;">1</span>889.   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> [1,2,3… linear &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   266.      3   <span style="text-decoration: underline;">20</span>961.    <span style="text-decoration: underline;">2</span>248.   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> [1,2,3… 1/time &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   274.      6.2 <span style="text-decoration: underline;">17</span>784.    <span style="text-decoration: underline;">1</span>160    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> [1,2,3… 3-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>  246.      6.2 <span style="text-decoration: underline;">42</span>699.    <span style="text-decoration: underline;">7</span>655   595.       70.2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> [1,2,3… 2-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>  261.      4.7 <span style="text-decoration: underline;">24</span>814.    <span style="text-decoration: underline;">3</span>691.   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> [1,2,3… linear &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   269.      5.9 <span style="text-decoration: underline;">19</span>977.    <span style="text-decoration: underline;">2</span>877.   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> [1,2,3… 1/time &lt;tibble&gt; <span style="color: #949494;">&lt;lm&gt;</span>   278.      7.9 <span style="text-decoration: underline;">17</span>194.    <span style="text-decoration: underline;">1</span>339.   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> [1,2,3… 3-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>  255       1.9 <span style="text-decoration: underline;">36</span>462.    <span style="text-decoration: underline;">3</span>328.  627.       63.7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> [1,2,3… 2-hyp  &lt;tibble&gt; <span style="color: #949494;">&lt;nls&gt;</span>  262.      2.2 <span style="text-decoration: underline;">24</span>940.    <span style="text-decoration: underline;">2</span>882.   <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>  </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 64 more rows, and 3 more variables: R2 &lt;dbl&gt;, RMSE &lt;dbl&gt;, plot &lt;list&gt;</span></span></code></pre></div>
 <p>You can also check the plots of each estimation in case you set <code>plot = TRUE</code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw">combinations_results</span> <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span>(<span class="fl">10</span>) <span class="op">%&gt;%</span> 
-  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span>(<span class="kw">plot</span>)
-<span class="co">#&gt; [[1]]</span>
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">combinations_results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">plot</span><span class="op">)</span>
+<span class="co">#&gt; [[1]]</span></code></pre></div>
 <p><img src="cyclingtools_files/figure-html/unnamed-chunk-9-1.png" width="2187.5" style="display: block; margin: auto;"></p>
 </div>
-<div id="shiny-app" class="section level2">
-<h2 class="hasAnchor">
-<a href="#shiny-app" class="anchor"></a>Shiny app</h2>
-<p>All of these functions can be performed in <a href="https://www.shiny.fmattioni.me/CPapp/">Critical Power Dashboard</a></p>
+<div class="section level2">
+<h2 id="shiny-app">Shiny app<a class="anchor" aria-label="anchor" href="#shiny-app"></a>
+</h2>
+<p>All of these functions can be performed in <a href="https://www.shiny.fmattioni.me/CPapp/" class="external-link">Critical Power Dashboard</a></p>
 </div>
   </div>
 
@@ -271,11 +266,13 @@ If you have a suggestion, feel free to open an issue.
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://fmattioni.me">Felipe Mattioni Maturana</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://fmattioni.me" class="external-link">Felipe Mattioni Maturana</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.9000.</p>
 </div>
 
       </footer>
@@ -283,6 +280,8 @@ If you have a suggestion, feel free to open an issue.
 
   
 
+
+  
 
   </body>
 </html>
