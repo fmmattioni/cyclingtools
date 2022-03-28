@@ -187,7 +187,7 @@ method_cp.speed <- function(
 
     # Setting starting values
     a_start <- max(.data[["speed"]]) * min(.data[[{{ time_to_exhaustion_column }}]])
-    b_start <- min(.data[["speed"]]) * 0.9
+    b_start <- min(.data[["speed"]]) * 0.7
     c_start <- max(.data[["speed"]]) * 1.5
 
     # Formula
@@ -209,7 +209,7 @@ method_cp.speed <- function(
 
     # Setting starting values
     a_start <- max(.data[["speed"]]) * min(.data[[{{ time_to_exhaustion_column }}]])
-    b_start <- min(.data[["speed"]]) * 0.9
+    b_start <- min(.data[["speed"]]) * 0.7
 
     # Formula
     cs_formula <- glue::glue("{time_to_exhaustion_column} ~ AWC / (speed - CS)")
